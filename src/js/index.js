@@ -1,9 +1,5 @@
-import path from "path";
-import fs from "fs-extra";
 import _ from "underscore";
-
-const filePath = path.resolve(__dirname, "../../periodic-table.json");
-export const ELEMENTS = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+import {ELEMENTS} from "./elements";
 
 export const ELEMENTS_BY_SYMBOL = _.reduce(ELEMENTS, function (memo, item) {
     memo[item.symbol] = item;
