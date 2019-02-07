@@ -1,6 +1,8 @@
 import _ from "underscore";
 import {ELEMENTS} from "./elements";
 
+export {ELEMENTS};
+
 export const ELEMENTS_BY_SYMBOL = _.reduce(ELEMENTS, function (memo, item) {
     memo[item.symbol] = item;
     return memo;
