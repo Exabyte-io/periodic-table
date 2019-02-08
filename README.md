@@ -2,6 +2,10 @@
 
 Data about chemical elements arranged in JSON format.
 
+## Node.js
+In order to make the data available on client, `periodic-table.json` is written into `elements.js` when the package is installed.
+See `package.json` postinstall script for more information.
+
 ## Links
 
 1. Original source: GPeriodic, Open source Linux software: [link](http://gperiodic.seul.org/)

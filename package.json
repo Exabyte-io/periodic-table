@@ -1,0 +1,26 @@
+{
+    "name": "periodic-table",
+    "version": "0.1.0",
+    "description": "Periodic Table",
+    "scripts": {
+        "postinstall": "mkdir -p lib; babel src --out-dir lib; node lib/js/generate.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Exabyte-io/periodic-table.git"
+    },
+    "main": "lib/js/index.js",
+    "author": "Exabyte Inc.",
+    "bugs": {
+        "url": "https://github.com/Exabyte-io/periodic-table/issues"
+    },
+    "homepage": "https://github.com/Exabyte-io/periodic-table",
+    "dependencies": {
+        "@babel/cli": "7.0.0",
+        "@babel/core": "7.0.0",
+        "@babel/polyfill": "7.0.0",
+        "@babel/preset-env": "7.0.0",
+        "underscore": "^1.8.3",
+        "fs-extra": "^4.0.0"
+    }
+}
