@@ -7,9 +7,9 @@ const rootDir = path.resolve(__dirname, "../../");
 
 [
     {
-        srcFileName: "element-colors.json",
+        srcFileName: "colors.json",
         dstFileName: "colors.js",
-        variableName: "ELEMENT_COLORS"
+        variableName: "COLORS"
     },
     {
         srcFileName: "periodic-table.json",
@@ -17,9 +17,9 @@ const rootDir = path.resolve(__dirname, "../../");
         variableName: "ELEMENTS"
     },
     {
-        srcFileName: "element-vdwRadii",
+        srcFileName: "vdwRadii.json",
         dstFileName: "vdwRadii.js",
-        variableName: "ELEMENT_VDW_RADII"
+        variableName: "VDW_RADII"
     }
 
 ].forEach(config => {

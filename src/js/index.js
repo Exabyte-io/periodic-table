@@ -1,12 +1,12 @@
 import _ from "underscore";
 
+import {COLORS} from "./colors";
 import {ELEMENTS} from "./elements";
 import {VDW_RADII} from "./vdwRadii";
-import {ELEMENT_COLORS} from "./colors";
 
+export {COLORS};
 export {ELEMENTS};
 export {VDW_RADII};
-export {ELEMENT_COLORS};
 
 export const ELEMENTS_BY_SYMBOL = _.reduce(ELEMENTS, function (memo, item) {
     memo[item.symbol] = item;
