@@ -1,14 +1,14 @@
 import _ from "underscore";
 
-import {COLORS} from "./colors";
-import {ELEMENTS} from "./elements";
-import {VDW_RADII} from "./vdwRadii";
+import {PERIDIC_TABLE} from "./peridic_table";
+import {ELEMENT_COLORS} from "./element_colors";
+import {ELEMENT_VDW_RADIIS} from "./element_vdwRadiis";
 
-export {COLORS};
-export {ELEMENTS};
-export {VDW_RADII};
+export {PERIDIC_TABLE};
+export {ELEMENT_COLORS};
+export {ELEMENT_VDW_RADIIS};
 
-export const ELEMENTS_BY_SYMBOL = _.reduce(ELEMENTS, function (memo, item) {
+export const ELEMENTS_BY_SYMBOL = _.reduce(PERIDIC_TABLE, function (memo, item) {
     memo[item.symbol] = item;
     return memo;
 }, {});
