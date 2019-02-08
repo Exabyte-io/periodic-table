@@ -1,6 +1,6 @@
 import _ from "underscore";
 
-import {PERIDIC_TABLE} from "./peridic_table";
+import {PERIDIC_TABLE} from "./periodic_table";
 import {ELEMENT_COLORS} from "./element_colors";
 import {ELEMENT_VDW_RADIIS} from "./element_vdwRadiis";
 
