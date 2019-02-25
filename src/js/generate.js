@@ -17,9 +17,9 @@ const rootDir = path.resolve(__dirname, "../../");
         variableName: "PERIODIC_TABLE"
     },
     {
-        srcFileName: "element-vdwRadiis.json",
-        dstFileName: "element_vdwRadiis.js",
-        variableName: "ELEMENT_VDW_RADIIS"
+        srcFileName: "element-vdwRadii.json",
+        dstFileName: "element_vdwRadii.js",
+        variableName: "ELEMENT_VDW_RADII"
     }
 
 ].forEach(config => {

@@ -2,11 +2,11 @@ import _ from "underscore";
 
 import {PERIODIC_TABLE} from "./periodic_table";
 import {ELEMENT_COLORS} from "./element_colors";
-import {ELEMENT_VDW_RADIIS} from "./element_vdwRadiis";
+import {ELEMENT_VDW_RADII} from "./element_vdwRadii";
 
 export {PERIODIC_TABLE};
 export {ELEMENT_COLORS};
-export {ELEMENT_VDW_RADIIS};
+export {ELEMENT_VDW_RADII};
 
 export const ELEMENTS_BY_SYMBOL = _.reduce(PERIODIC_TABLE, function (memo, item) {
     memo[item.symbol] = item;
