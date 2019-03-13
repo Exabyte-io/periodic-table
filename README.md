@@ -2,9 +2,30 @@
 
 Data about chemical elements arranged in JSON format.
 
+## Installation
+
+The package can be installed from NPM as follow:
+
+```bash
+npm install periodic-table-js
+
+```
+
+## Usage
+
+```javascript
+import {PERIODIC_TABLE} from "periodic-table-js";
+
+console.log(PERIODIC_TABLE.Hydrogen)
+```
+
 ## Notes
 
-- Colors in CPK convention
+- Colors are in CPK convention
+
+## Contribution
+
+This repository is an [open-source](LICENSE.md) work-in-progress and we welcome contributions.
 
 ## Links
 
