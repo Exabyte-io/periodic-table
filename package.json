@@ -1,9 +1,9 @@
 {
-    "name": "periodic-table",
+    "name": "periodic-table-js",
     "version": "0.1.0",
     "description": "Periodic Table",
     "scripts": {
-        "postinstall": "mkdir -p lib; babel src --out-dir lib; node lib/js/generate.js"
+        "transpile": "mkdir -p lib; babel src --out-dir lib; node lib/js/generate.js"
     },
     "repository": {
         "type": "git",
@@ -14,6 +14,7 @@
     "bugs": {
         "url": "https://github.com/Exabyte-io/periodic-table/issues"
     },
+    "license": "Apache-2.0",
     "homepage": "https://github.com/Exabyte-io/periodic-table",
     "dependencies": {
         "@babel/cli": "7.0.0",
