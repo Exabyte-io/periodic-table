@@ -7,14 +7,14 @@ Data about chemical elements arranged in JSON format.
 The package can be installed from NPM as follow:
 
 ```bash
-npm install periodic-table-js
+npm install @exabyte-io/periodic-table.js
 
 ```
 
 ## Usage
 
 ```javascript
-import {PERIODIC_TABLE} from "periodic-table-js";
+import {PERIODIC_TABLE} from "@exabyte-io/periodic-table.js";
 
 console.log(PERIODIC_TABLE.Hydrogen)
 ```

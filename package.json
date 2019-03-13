@@ -1,5 +1,5 @@
 {
-    "name": "periodic-table-js",
+    "name": "@exabyte-io/periodic-table.js",
     "version": "1.0.0",
     "description": "Data about chemical elements arranged in JSON format",
     "scripts": {
