@@ -7,6 +7,11 @@ const rootDir = path.resolve(__dirname, "../../");
 
 [
     {
+        srcFileName: "element-bonds.json",
+        dstFileName: "element_bonds.js",
+        variableName: "ELEMENT_BONDS"
+    },
+    {
         srcFileName: "element-colors.json",
         dstFileName: "element_colors.js",
         variableName: "ELEMENT_COLORS"
