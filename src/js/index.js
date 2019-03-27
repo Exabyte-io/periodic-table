@@ -19,3 +19,36 @@ export function getElectronegativity(symbol) {
     const config = ELEMENTS_BY_SYMBOL[symbol];
     return config ? config["pauling_negativity"] : 0;  // return zero if value cannot be accessed by symbol
 }
+
+/**
+ * Determines whether elements are bonded. Elements are bonded if the distance is equal or less than
+ *  - the bond length, if bond length exists, or
+ *  - the sum of covalent radii times the chemical connectivity factor (http://www.xcrysden.org/doc/modify.html).
+ */
+export function areElementsBonded(element1, element2, distance, order = 1, chemicalConnectivityFactor = 1.05) {
+    const element1CovalentRadius = ELEMENTS_BY_SYMBOL[element1].covalent_radius_pm / 100;
+    const element2CovalentRadius = ELEMENTS_BY_SYMBOL[element2].covalent_radius_pm / 100;
+    const allBonds = [
+        ...ELEMENT_BONDS,
+        // below is used as default
+        {
+            "elements": [
+                element1,
+                element2
+            ],
+            "energy": {
+                "value": "",
+                "units": "eV"
+            },
+            "length": {
+                "value": (element1CovalentRadius + element2CovalentRadius) * chemicalConnectivityFactor,
+                "units": "angstrom"
+            },
+            "order": order
+        },
+    ];
+    return Boolean(allBonds.find(b => {
+        return b.elements.includes(element1) && b.elements.includes(element2) &&
+            b.length.value && b.order === order && b.length.value >= distance;
+    }));
+}
