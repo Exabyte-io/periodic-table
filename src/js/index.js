@@ -21,11 +21,10 @@ export function getElectronegativity(symbol) {
 }
 
 /**
- * Determines whether elements are bonded. Elements are bonded if the distance is equal or less than
- *  - the bond length, if bond length exists, or
- *  - the sum of covalent radii times the chemical connectivity factor (http://www.xcrysden.org/doc/modify.html).
+ * Returns bond information for the given elements.
+ * The sum of covalent radii times the chemical connectivity factor is used as the default bond length.
  */
-export function areElementsBonded(element1, element2, distance, order = 1, chemicalConnectivityFactor = 1.05) {
+export function getElementsBondsData(element1, element2, order = undefined, chemicalConnectivityFactor = 1.05) {
     const element1CovalentRadius = ELEMENTS_BY_SYMBOL[element1].covalent_radius_pm / 100;
     const element2CovalentRadius = ELEMENTS_BY_SYMBOL[element2].covalent_radius_pm / 100;
     const allBonds = [
@@ -47,8 +46,17 @@ export function areElementsBonded(element1, element2, distance, order = 1, chemi
             "order": order
         },
     ];
-    return Boolean(allBonds.find(b => {
-        return b.elements.includes(element1) && b.elements.includes(element2) &&
-            b.length.value && b.order === order && b.length.value >= distance;
-    }));
+    return allBonds.filter(b => {
+        return b.elements.includes(element1) && b.elements.includes(element2) && (order ? b.order === order : true);
+    });
+}
+
+/**
+ * Determines whether elements are bonded. Elements are bonded if the distance is equal or less than
+ *  - the bond length, if bond length exists, or
+ *  - the sum of covalent radii times the chemical connectivity factor (http://www.xcrysden.org/doc/modify.html).
+ */
+export function areElementsBonded(element1, element2, distance, order = undefined, chemicalConnectivityFactor = 1.05) {
+    const allBonds = getElementsBondData(element1, element2, order, chemicalConnectivityFactor);
+    return Boolean(allBonds.find(b => b.length.value && b.length.value >= distance));
 }
