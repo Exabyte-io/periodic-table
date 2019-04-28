@@ -47,7 +47,7 @@ export function getElementsBondsData(element1, element2, order = undefined, chem
         },
     ];
     return allBonds.filter(b => {
-        return b.elements.includes(element1) && b.elements.includes(element2) && (order ? b.order === order : true);
+        return [element1, element2].every(e => b.elements.includes(e)) && (order ? b.order === order : true);
     });
 }
 
