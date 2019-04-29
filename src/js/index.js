@@ -20,43 +20,41 @@ export function getElectronegativity(symbol) {
     return config ? config["pauling_negativity"] : 0;  // return zero if value cannot be accessed by symbol
 }
 
-/**
- * Returns bond information for the given elements.
- * The sum of covalent radii times the chemical connectivity factor is used as the default bond length.
- */
-export function getElementsBondsData(element1, element2, order = undefined, chemicalConnectivityFactor = 1.05) {
-    const element1CovalentRadius = ELEMENTS_BY_SYMBOL[element1].covalent_radius_pm / 100;
-    const element2CovalentRadius = ELEMENTS_BY_SYMBOL[element2].covalent_radius_pm / 100;
-    const allBonds = [
-        ...ELEMENT_BONDS,
-        // below is used as default
-        {
-            "elements": [
-                element1,
-                element2
-            ],
-            "energy": {
-                "value": "",
-                "units": "eV"
-            },
-            "length": {
-                "value": (element1CovalentRadius + element2CovalentRadius) * chemicalConnectivityFactor,
-                "units": "angstrom"
-            },
-            "order": order
-        },
-    ];
-    return allBonds.filter(b => {
-        return [element1, element2].every(e => b.elements.includes(e)) && (order ? b.order === order : true);
+export function filterBondsDataByElementsAndOrder(bondsData, element1, element2, order = undefined) {
+    return bondsData.filter(b => {
+        return b.elements.sort().toString() === [element1, element2].sort().toString()
+            && (order ? b.order === order : true);
     });
 }
 
 /**
- * Determines whether elements are bonded. Elements are bonded if the distance is equal or less than
- *  - the bond length, if bond length exists, or
- *  - the sum of covalent radii times the chemical connectivity factor (http://www.xcrysden.org/doc/modify.html).
+ * The sum of covalent radii is used as the default bond length.
  */
-export function areElementsBonded(element1, element2, distance, order = undefined, chemicalConnectivityFactor = 1.05) {
-    const allBonds = getElementsBondData(element1, element2, order, chemicalConnectivityFactor);
-    return Boolean(allBonds.find(b => b.length.value && b.length.value >= distance));
+export function getDefaultElementsBondsData(element1, element2, order = undefined) {
+    const element1CovalentRadius = ELEMENTS_BY_SYMBOL[element1].covalent_radius_pm / 100;
+    const element2CovalentRadius = ELEMENTS_BY_SYMBOL[element2].covalent_radius_pm / 100;
+    return {
+        "elements": [
+            element1,
+            element2
+        ],
+        "energy": {
+            "value": "",
+            "units": "eV"
+        },
+        "length": {
+            "value": element1CovalentRadius + element2CovalentRadius,
+            "units": "angstrom"
+        },
+        "order": order
+    }
+}
+
+/**
+ * Returns bond information for the given elements.
+ */
+export function getElementsBondsData(element1, element2, order = undefined) {
+    const defaultElementsBondsData = getDefaultElementsBondsData(element1, element2, order);
+    const bondsData = filterBondsDataByElementsAndOrder(ELEMENT_BONDS, element1, element2, order);
+    return bondsData.length ? bondsData : [defaultElementsBondsData];
 }

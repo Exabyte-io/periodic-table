@@ -1,6 +1,6 @@
 {
     "name": "@exabyte-io/periodic-table.js",
-    "version": "2.0.4",
+    "version": "2.0.5",
     "description": "Data about chemical elements arranged in JSON format",
     "scripts": {
         "prepublishOnly": "rm -rf lib; npm run transpile",
