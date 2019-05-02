@@ -15,11 +15,24 @@ export const ELEMENTS_BY_SYMBOL = _.reduce(PERIODIC_TABLE, function (memo, item)
     return memo;
 }, {});
 
+/**
+ * Returns element electronegativity by symbol.
+ * @param symbol {String} element symbol to get electronegativity for.
+ * @returns {number}
+ */
 export function getElectronegativity(symbol) {
     const config = ELEMENTS_BY_SYMBOL[symbol];
     return config ? config["pauling_negativity"] : 0;  // return zero if value cannot be accessed by symbol
 }
 
+/**
+ * Filters the given bondsData array and returns the entries for given elements and order.
+ * @param bondsData {Array} an array of bonds data entries
+ * @param element1 {String} symbol of the first element
+ * @param element2 {String} symbol of the second element
+ * @param order {Number} the bond number
+ * @returns {Array}
+ */
 export function filterBondsDataByElementsAndOrder(bondsData, element1, element2, order = undefined) {
     return bondsData.filter(b => {
         return b.elements.sort().toString() === [element1, element2].sort().toString()
@@ -28,9 +41,13 @@ export function filterBondsDataByElementsAndOrder(bondsData, element1, element2,
 }
 
 /**
- * The sum of covalent radii is used as the default bond length.
+ * Returns default bond data for given elements. The sum of covalent radii is used as the default bond length.
+ * @param element1 {String} symbol of the first element
+ * @param element2 {String} symbol of the second element
+ * @param order {Number} the bond number
+ * @returns {Object}
  */
-export function getDefaultElementsBondsData(element1, element2, order = undefined) {
+export function defaultElementsBondsDataEntry(element1, element2, order = undefined) {
     const element1CovalentRadius = ELEMENTS_BY_SYMBOL[element1].covalent_radius_pm / 100;
     const element2CovalentRadius = ELEMENTS_BY_SYMBOL[element2].covalent_radius_pm / 100;
     return {
@@ -51,10 +68,14 @@ export function getDefaultElementsBondsData(element1, element2, order = undefine
 }
 
 /**
- * Returns bond information for the given elements.
+ * Returns bonds data for given elements.
+ * @param element1 {String} symbol of the first element
+ * @param element2 {String} symbol of the second element
+ * @param order {Number} the bond number
+ * @returns {Array}
  */
 export function getElementsBondsData(element1, element2, order = undefined) {
-    const defaultElementsBondsData = getDefaultElementsBondsData(element1, element2, order);
+    const defaultElementsBondsData = defaultElementsBondsDataEntry(element1, element2, order);
     const bondsData = filterBondsDataByElementsAndOrder(ELEMENT_BONDS, element1, element2, order);
     return bondsData.length ? bondsData : [defaultElementsBondsData];
 }
