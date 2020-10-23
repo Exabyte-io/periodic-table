@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/%40exabyte-io%2Fperiodic-table.js.svg)](https://badge.fury.io/js/%40exabyte-io%2Fperiodic-table.js)
+
 # Periodic Table
 
 Data about chemical elements arranged in JSON format.
