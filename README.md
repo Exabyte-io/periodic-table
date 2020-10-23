@@ -26,9 +26,13 @@ console.log(PERIODIC_TABLE.Hydrogen)
 
 - Colors are in CPK convention
 
-## Contribution
+## Contributions
 
 This repository is an [open-source](LICENSE.md) work-in-progress and we welcome contributions.
+
+## ToDos
+
+- Add python code to make this repository into a python package
 
 ## Links
 
