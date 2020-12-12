@@ -1,3 +1,6 @@
+[![npm version](https://badge.fury.io/js/%40exabyte-io%2Fperiodic-table.js.svg)](https://badge.fury.io/js/%40exabyte-io%2Fperiodic-table.js)
+[![License: Apache](https://img.shields.io/badge/License-Apache-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+
 # Periodic Table
 
 Data about chemical elements arranged in JSON format.
@@ -23,9 +26,13 @@ console.log(PERIODIC_TABLE.Hydrogen)
 
 - Colors are in CPK convention
 
-## Contribution
+## Contributions
 
 This repository is an [open-source](LICENSE.md) work-in-progress and we welcome contributions.
+
+## ToDos
+
+- Add python code to make this repository into a python package
 
 ## Links
 
