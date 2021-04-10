@@ -15,6 +15,9 @@
     "bugs": {
         "url": "https://github.com/Exabyte-io/periodic-table/issues"
     },
+    "engines": {
+        "node": ">=0.12"
+    },
     "license": "Apache-2.0",
     "homepage": "https://github.com/Exabyte-io/periodic-table",
     "dependencies": {
