@@ -81,14 +81,15 @@ export function getElementsBondsData(element1, element2, order = undefined) {
 }
 
 /**
- * Finds the atomic radius for an element based on it's atomic symbol (i.e. 'O' for Oxygen)
+ * Returns the atomic radius for an element based on it's atomic symbol (i.e. 'O' for Oxygen)
  * The atomicRadius returned from PERIODIC_TABLE is in units of picometers (pm).
- * To convert pm to Angstroms, multiply the pm value by 0.01.
+ * The radius is returned in units of Angstroms. To convert pm to Angstroms, multiply the pm value by 0.01.
  *
  * If the element does not exist inside the PERIODIC_TABLE then the atomicRadius is returned as 1.0.
  * A value of 1.0 is chosen so that if this value is used to set a new lattice size, then the lattice size
- * will not collapse to 0, but will instead have a size of at least 1.0 angstroms.
+ * will not collapse to 0, but will instead have a size of at least 1.0 angstrom.
  *
+ * @param elementSymbol {String}
  * @returns {Number}
  */
 export function getElementAtomicRadius(elementSymbol) {
