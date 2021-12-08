@@ -4,7 +4,8 @@
     "description": "Data about chemical elements arranged in JSON format",
     "scripts": {
         "prepublishOnly": "rm -rf lib; npm run transpile",
-        "transpile": "mkdir -p lib; babel src --out-dir lib; node lib/js/generate.js"
+        "transpile": "mkdir -p lib; babel src --out-dir lib; node lib/js/generate.js",
+        "postinstall": "npm run transpile"
     },
     "repository": {
         "type": "git",
