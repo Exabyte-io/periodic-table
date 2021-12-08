@@ -14,4 +14,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: Exabyte-io/actions/js-test@feature/SOF-5337
+      - uses: Exabyte-io/actions/js/test@feature/SOF-5337
