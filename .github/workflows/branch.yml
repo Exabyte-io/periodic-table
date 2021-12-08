@@ -1,0 +1,17 @@
+name: Branch
+
+on:
+  push:
+    branches-ignore:
+      - dev
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: Exabyte-io/actions/js/test@feature/SOF-5337
