@@ -1,19 +1,30 @@
-name: Branch
+name: CICD
 
-on:
-  push:
-    branches-ignore:
-      - dev
+on: [push]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
+
 jobs:
+
   run-tests:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [8.11.x, 12.21.x, 14.x, 16.x]
+
     steps:
       - uses: actions/checkout@v2
       - uses: Exabyte-io/actions/js/test@feature/SOF-5337
         with:
-          node-version: '12.21.x'
+          node-version: ${{ matrix.node-version }}
+
+
+  publish:
+    needs: run-tests
+    if: github.ref == 'refs/heads/dev'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: Exabyte-io/actions/js/publish@main
