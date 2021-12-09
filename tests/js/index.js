@@ -1,6 +1,5 @@
 import { expect } from "chai";
 import {
-    ELEMENT_BONDS,
     ELEMENT_COLORS,
     ELEMENT_VDW_RADII,
     ELEMENTS_BY_SYMBOL,
@@ -50,7 +49,6 @@ test_cases.forEach(({ el1, el2, maxOrder }) => {
         it("should return bond order", () => {
             const data = getElementsBondsData(el1, el2);
             const result = filterBondsDataByElementsAndOrder(data, el1,  el2, maxOrder);
-            console.log(result);
             expect(result).to.be.length(1);
             expect(result[0]["order"]).to.be.equal(maxOrder);
         })
@@ -71,7 +69,6 @@ test_cases.forEach(({ el1, el2, maxOrder }) => {
     describe("Bonds:Data", () => {
         it("should return bond data", () => {
             const data = getElementsBondsData(el1, el2);
-            console.log(data);
             expect(data).to.be.length(maxOrder || 1);
         })
     })
