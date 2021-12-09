@@ -15,3 +15,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: Exabyte-io/actions/js/test@feature/SOF-5337
+        with:
+          node-version: '12.21.x'
