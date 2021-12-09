@@ -4,7 +4,9 @@
     "description": "Data about chemical elements arranged in JSON format",
     "scripts": {
         "prepublishOnly": "rm -rf lib; npm run transpile",
-        "transpile": "mkdir -p lib; babel src --out-dir lib; node lib/js/generate.js"
+        "transpile": "mkdir -p lib; babel src --out-dir lib; node lib/js/generate.js",
+        "test": "npm run transpile; nyc --reporter=text mocha --recursive --bail --require @babel/register/lib tests",
+        "postinstall": "npm run transpile"
     },
     "repository": {
         "type": "git",
@@ -22,7 +24,13 @@
         "@babel/core": "7.0.0",
         "@babel/polyfill": "7.0.0",
         "@babel/preset-env": "7.0.0",
+        "@babel/register": "7.0.0",
         "underscore": "^1.8.3",
         "fs-extra": "^4.0.0"
+    },
+    "devDependencies": {
+        "chai": "^4.3.4",
+        "mocha": "^9.1.3",
+        "nyc": "^15.1.0"
     }
 }
