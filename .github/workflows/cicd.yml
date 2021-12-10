@@ -31,3 +31,5 @@ jobs:
       - uses: Exabyte-io/actions/js/publish@main
         with:
           node-version: 12.21.x
+          npm-token: ${{ secrets.NPM_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
