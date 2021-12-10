@@ -1,5 +1,5 @@
 import path from "path";
-import fs from "fs-extra";
+import fs from "fs";
 
 // The JSON files are written into JS files to become accessible on both client and server.
 
@@ -33,5 +33,5 @@ const rootDir = path.resolve(__dirname, "../../");
         `var ${config.variableName} = ${data}`,
         `exports.${config.variableName} = ${config.variableName}`
     ].join("\n");
-    fs.writeFile(path.resolve(__dirname, config.dstFileName), content);
+    fs.writeFileSync(path.resolve(__dirname, config.dstFileName), content);
 });
