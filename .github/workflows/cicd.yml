@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: Exabyte-io/actions/js/test@feature/SOF-5337
+      - uses: Exabyte-io/actions/js/test@main
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -32,4 +32,4 @@ jobs:
         with:
           node-version: 12.21.x
           npm-token: ${{ secrets.NPM_TOKEN }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.BOT_GITHUB_TOKEN }}
