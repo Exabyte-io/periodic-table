@@ -25,7 +25,7 @@ jobs:
   publish:
     needs: run-tests
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/dev'
+    if: github.ref_name == 'dev'
     steps:
       - uses: actions/checkout@v2
       - uses: Exabyte-io/actions/js/publish@main
