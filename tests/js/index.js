@@ -10,7 +10,7 @@ import {
     getElementsBondsData,
 } from "../../lib/js/index";
 
-const test_cases = [
+const testCases = [
     { el1: "H", el2: "H", name1: "Hydrogen", vdw: "number", maxOrder: 1},
     { el1: "C", el2: "H", name1: "Carbon", vdw: "number", maxOrder: 1},
     { el1: "N", el2: "H", name1: "Nitrogen", vdw: "number", maxOrder: 1},
@@ -18,7 +18,7 @@ const test_cases = [
     { el1: "U", el2: "U", name1: "Uranium", vdw: "undefined", maxOrder: undefined},
 ];
 
-test_cases.forEach(({ el1 , name1, vdw }) => {
+testCases.forEach(({ el1 , name1, vdw }) => {
     describe("Element:Data", () => {
         it("should return element data", () => {
             const data = ELEMENTS_BY_SYMBOL[el1];
@@ -35,7 +35,7 @@ test_cases.forEach(({ el1 , name1, vdw }) => {
     })
 })
 
-test_cases.forEach(({ el1 }) => {
+testCases.forEach(({ el1 }) => {
     describe("Element:Electronegativity", () => {
         it("should return electronegativity", () => {
             const data = getElectronegativity(el1);
@@ -44,7 +44,7 @@ test_cases.forEach(({ el1 }) => {
     })
 })
 
-test_cases.forEach(({ el1, el2, maxOrder }) => {
+testCases.forEach(({ el1, el2, maxOrder }) => {
     describe("Bonds:Order", () => {
         it("should return bond order", () => {
             const data = getElementsBondsData(el1, el2);
@@ -55,7 +55,7 @@ test_cases.forEach(({ el1, el2, maxOrder }) => {
     })
 })
 
-test_cases.forEach(({ el1, el2, maxOrder }) => {
+testCases.forEach(({ el1, el2, maxOrder }) => {
     describe("Bonds:Entry", () => {
         it("should return bond entry", () => {
             const data = defaultElementsBondsDataEntry(el1, el2, maxOrder);
@@ -65,7 +65,7 @@ test_cases.forEach(({ el1, el2, maxOrder }) => {
     })
 })
 
-test_cases.forEach(({ el1, el2, maxOrder }) => {
+testCases.forEach(({ el1, el2, maxOrder }) => {
     describe("Bonds:Data", () => {
         it("should return bond data", () => {
             const data = getElementsBondsData(el1, el2);
