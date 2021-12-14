@@ -16,8 +16,18 @@ jobs:
         node-version: [10.x, 12.x, 14.x, 16.x]
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: Exabyte-io/actions/js/test@main
+      - name: Checkout this repository
+        uses: actions/checkout@v2
+
+      - name: Checkout actions repository
+        uses: actions/checkout@v2
+        with:
+            repository: Exabyte-io/actions
+            token: ${{ secrets.BOT_GITHUB_TOKEN }}
+            path: actions
+
+      - name: Run tests
+        uses: ./actions/js/test
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -26,9 +36,20 @@ jobs:
     needs: run-tests
     runs-on: ubuntu-latest
     if: github.ref_name == 'dev'
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: Exabyte-io/actions/js/publish@main
+      - name: Checkout this repository
+        uses: actions/checkout@v2
+
+      - name: Checkout actions repository
+        uses: actions/checkout@v2
+        with:
+          repository: Exabyte-io/actions
+          token: ${{ secrets.BOT_GITHUB_TOKEN }}
+          path: actions
+
+      - name: Publish release
+        uses: ./actions/js/publish
         with:
           node-version: 12.21.x
           npm-token: ${{ secrets.NPM_TOKEN }}
