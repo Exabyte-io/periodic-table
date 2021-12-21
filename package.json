@@ -6,30 +6,55 @@
         "prepublishOnly": "rm -rf lib; npm run transpile",
         "transpile": "mkdir -p lib; babel src --out-dir lib; node lib/js/generate.js",
         "test": "npm run transpile; nyc --reporter=text mocha --recursive --bail --require @babel/register/lib tests",
-        "postinstall": "npm run transpile"
+        "postinstall": "npm run transpile",
+        "lint": "eslint src tests && prettier --write src tests",
+        "lint:fix": "eslint --fix --cache src tests && prettier --write src tests",
+        "prettier": "prettier --check src tests",
+        "prepare": "husky install"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/Exabyte-io/periodic-table.git"
+        "url": "https://github.com/Exabyte-io/periodic-table.js.git"
     },
     "main": "lib/js/index.js",
     "author": "Exabyte Inc.",
     "bugs": {
-        "url": "https://github.com/Exabyte-io/periodic-table/issues"
+        "url": "https://github.com/Exabyte-io/periodic-table.js/issues"
     },
     "license": "Apache-2.0",
-    "homepage": "https://github.com/Exabyte-io/periodic-table",
+    "homepage": "https://github.com/Exabyte-io/periodic-table.js",
     "dependencies": {
-        "@babel/cli": "7.0.0",
-        "@babel/core": "7.0.0",
-        "@babel/polyfill": "7.0.0",
-        "@babel/preset-env": "7.0.0",
-        "@babel/register": "7.0.0",
-        "underscore": "^1.8.3"
+        "@babel/cli": "7.16.0",
+        "@babel/core": "7.16.0",
+        "@babel/preset-env": "7.16.4",
+        "@babel/eslint-parser": "7.16.3",
+        "@babel/plugin-proposal-class-properties": "7.16.0",
+        "@babel/register": "7.16.0",
+        "underscore": "1.8.3"
     },
     "devDependencies": {
-        "chai": "^4.3.4",
-        "mocha": "^9.1.3",
-        "nyc": "^15.1.0"
+        "chai": "4.3.4",
+        "mocha": "9.1.3",
+        "nyc": "15.1.0",
+        "eslint": "7.32.0",
+        "eslint-config-airbnb": "19.0.2",
+        "eslint-config-prettier": "8.3.0",
+        "eslint-plugin-prettier": "4.0.0",
+        "eslint-plugin-import": "2.25.3",
+        "eslint-plugin-jsdoc": "37.1.0",
+        "eslint-plugin-simple-import-sort": "7.0.0",
+        "eslint-plugin-jsx-a11y": "6.5.1",
+        "eslint-plugin-react": "7.27.1",
+        "eslint-plugin-react-hooks": "4.3.0",
+        "husky": "7.0.4",
+        "lint-staged": "12.1.2",
+        "prettier": "2.5.1"
+    },
+    "engines" : { 
+        "node" : ">=8.0.0" 
+    },
+    "lint-staged": {
+        "*.js": "eslint --cache --fix",
+        "*.{js,css}": "prettier --write"
     }
 }
