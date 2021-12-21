@@ -41,6 +41,3 @@ This repository is an [open-source](LICENSE.md) work-in-progress and we welcome 
 3. Related StackExchange Discussion: [link](https://chemistry.stackexchange.com/questions/2793/where-can-i-find-a-downloadable-spreadsheet-of-element-properties#answer-2794)
 4. Selected Bond Energies and Bond Lengths: [link](http://www.chem.tamu.edu/rgroup/connell/linkfiles/bonds.pdf)
 
-
-
-
