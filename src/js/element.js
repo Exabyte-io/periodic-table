@@ -1,8 +1,12 @@
 import { ELEMENT_COLORS } from "./element_colors";
 import { PERIODIC_TABLE } from "./periodic_table.js";
-import { CONVERSION, UNITS, convertLength, convertEnergy } from "./units";
+import { CONVERSION, UNITS, convertUnit } from "./units";
 
-export class Element {
+export class ChemicalElement {
+    /**
+     * @summary ChemicalElement class constructor
+     * @param {string} symbol - Atomic symbol (not case-sensitive)
+     */
     constructor(symbol) {
         this.symbol = symbol;
         this._properties = PERIODIC_TABLE[this.symbol];
@@ -17,9 +21,9 @@ export class Element {
     }
 
     set symbol(symbol) {
-        if (Element.isValidSymbol(symbol, true)) {
+        if (ChemicalElement.isValidSymbol(symbol, true)) {
             this._symbol = symbol;
-        } else if (Element.isValidSymbol(symbol, false)) {
+        } else if (ChemicalElement.isValidSymbol(symbol, false)) {
             this._symbol = symbol.charAt(0).toUpperCase() + symbol.slice(1).toLowerCase();
         } else {
             throw new Error(`Invalid symbol: ${symbol}`);
@@ -31,15 +35,15 @@ export class Element {
      * @returns {number|undefined} - Atomic mass in amu
      */
     get mass() {
-        if (Number.isFinite(this._properties.atomic_mass)) {
+        if (typeof this._properties.atomic_mass === "number") {
             return this._properties.atomic_mass;
         }
     }
 
-    massIn(unit) {
+    massInUnits(unit) {
         if (this.mass === undefined) return;
         if (unit === UNITS.mass.kilogram)
-            return this.mass * CONVERSION[UNITS.mass.atomicMassUnit][UNITS.mass.kilogram];
+            return this.mass * CONVERSION.mass[UNITS.mass.atomicMassUnit][UNITS.mass.kilogram];
     }
 
     /**
@@ -53,9 +57,12 @@ export class Element {
         }
     }
 
-    atomicRadiusIn(unit) {
-        if (this.atomicRadius === undefined) return;
-        return convertLength(this.atomicRadius, { from: UNITS.length.picometer, to: unit });
+    atomicRadiusInUnits(unit) {
+        return convertUnit(this.atomicRadius, {
+            from: UNITS.length.picometer,
+            to: unit,
+            conversionTree: CONVERSION.length,
+        });
     }
 
     /**
@@ -70,9 +77,12 @@ export class Element {
         }
     }
 
-    vanDerWaalsRadiusIn(unit) {
-        if (this.vanDerWaalsRadius === undefined) return;
-        return convertLength(this.vanDerWaalsRadius, { from: UNITS.length.picometer, to: unit });
+    vanDerWaalsRadiusInUnits(unit) {
+        return convertUnit(this.vanDerWaalsRadius, {
+            from: UNITS.length.picometer,
+            to: unit,
+            conversionTree: CONVERSION.length,
+        });
     }
 
     /**
@@ -89,9 +99,12 @@ export class Element {
         }
     }
 
-    ionizationPotentialIn(unit) {
-        if (this.ionizationPotential === undefined) return;
-        return convertEnergy(this.ionizationPotential, { from: UNITS.energy.electronvolt, to: unit })
+    ionizationPotentialInUnits(unit) {
+        return convertUnit(this.ionizationPotential, {
+            from: UNITS.energy.electronvolt,
+            to: unit,
+            conversionTree: CONVERSION.energy,
+        });
     }
 
     static get colors() {

@@ -25,6 +25,10 @@ export const UNITS = {
 
 /**
  * Conversion coefficients based on data taken from Wikipedia (date accessed: 05/20/2022)
+ *
+ * Sources:
+ *   - https://en.wikipedia.org/wiki/Hartree
+ *   - https://en.wikipedia.org/wiki/Hartree_atomic_units
  */
 export const CONVERSION = {
     length: {
@@ -58,26 +62,48 @@ export const CONVERSION = {
     },
 };
 
-export function convertLength(value, {from = "pm", to = "pm"}) {
-    if (from === to) return value;
-
-    if (CONVERSION.length.hasOwnProperty(from) && CONVERSION.length[from].hasOwnProperty(to)) {
-        return value * CONVERSION.length[from][to];
-    } else if (CONVERSION.length.hasOwnProperty(to) && CONVERSION.length[to].hasOwnProperty(from)) {
-        return value / CONVERSION.length[to][from];
-    } else {
-        console.warn([value, from, to], "Unable to convert unit of length!");
+/**
+ * Convert value from source unit (`from`) to target unit (`to`) using a unit conversion object which has a tree-like
+ * structure (see example). If no coefficient can be found in `conversionTree[from][to]`, the reverse operation will
+ * be attempted (dividing by `conversionTree[to][from]`).
+ *
+ * @summary Converts value from one unit to another.
+ * @param value {number} - Value to be converted
+ * @param obj {Object} - Object containing unit details.
+ * @param obj.from {string} - Source unit as in `UNITS` constant
+ * @param obj.to {string} - Target unit as in `UNITS` constant
+ * @param obj.conversionTree {Object} - Object containing conversion coefficients in a tree-like structure
+ *        ( `Obj[fromUnit][toUnit]` )
+ * @returns {number|undefined}
+ * @example
+ *  convertUnit(1,
+ *    {
+ *       from: UNITS.energy.hartree,
+ *       to: UNITS.energy.electronvolt,
+ *       conversionTree: {
+ *           hartree: {
+ *               eV: 27.21138
+ *           }
+ *       }
+ *    }
+ *  );
+ *  // returns 27.21138
+ */
+export function convertUnit(value,
+    {
+        from = UNITS.energy.electronvolt,
+        to = UNITS.energy.electronvolt,
+        conversionTree = CONVERSION.energy,
+    },
+) {
+    if (typeof value !== "number") {
         return undefined;
-    }
-}
-
-export function convertEnergy(value, {from = "eV", to = "eV"}) {
-    if (from === to) return value;
-
-    if (CONVERSION.energy.hasOwnProperty(from) && CONVERSION.energy[from].hasOwnProperty(to)) {
-        return value * CONVERSION.energy[from][to];
-    } else if (CONVERSION.energy.hasOwnProperty(to) && CONVERSION.energy[to].hasOwnProperty(from)) {
-        return value / CONVERSION.energy[to][from];
+    } else if (from === to) {
+        return value;
+    } else if (conversionTree.hasOwnProperty(from) && conversionTree[from].hasOwnProperty(to)) {
+        return value * conversionTree[from][to];
+    } else if (conversionTree.hasOwnProperty(to) && conversionTree[to].hasOwnProperty(from)) {
+        return value / conversionTree[to][from];
     } else {
         console.warn([value, from, to], "Unable to convert unit of energy!");
         return undefined;

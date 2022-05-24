@@ -1,12 +1,14 @@
 import { ELEMENT_BONDS } from "./element_bonds";
 import { ELEMENT_COLORS } from "./element_colors";
 import { PERIODIC_TABLE } from "./periodic_table";
-import { Element } from "./element";
+import { ChemicalElement } from "./element";
+import { UNITS } from "./units";
 
 export { ELEMENT_BONDS };
 export { PERIODIC_TABLE };
 export { ELEMENT_COLORS };
-export { Element };
+export { ChemicalElement };
+export { UNITS };
 
 /**
  * Returns element electronegativity by symbol.
@@ -101,21 +103,41 @@ export function getElementAtomicRadius(elementSymbol) {
  *
  * @param elements {String[]} - List of elements (as symbols)
  * @param properties {String[]} - List of properties
- * @param propMap {Object} - Object mapping property names to custom names (e.g. {'atomic_radius_pm': 'radius'})
+ * @param propertiesMap {Object} - Object mapping property names to custom names (e.g. {'atomic_radius_pm': 'radius'})
  * @param separator {String} - Separator string for the suffix (default: ':')
  * @returns {Object[]} - List of Objects {property_key: property_value}
+ * @example
+ * getAtomicPropertiesFlat(
+ *     ["H", "Na"],
+ *     ["atomic_radius_pm", "atomic_number", "pauling_negativity"],
+ *     { atomic_radius_pm: "atomic_radius" }
+ * );
+ * // returns [
+ * //  { 'atomic_radius:H': 25 },
+ * //  { 'atomic_radius:Na': 180 },
+ * //  { 'atomic_number:H': 1 },
+ * //  { 'atomic_number:Na': 11 },
+ * //  { 'pauling_negativity:H': 2.2 },
+ * //  { 'pauling_negativity:Na': 0.93 },
+ * // ]
  */
-export function getAtomicPropertiesFlat(elements, properties, propMap, separator = ":") {
+export function getAtomicPropertiesFlat(
+    elements,
+    properties,
+    propertiesMap = undefined,
+    separator = ":",
+) {
     const allProperties = [];
-    const filteredElems = elements.filter((e) => Element.isValidSymbol(e));
-    const filteredProps = properties.filter((p) => Element.isValidProperty(p));
+    const filteredElems = elements.filter((e) => ChemicalElement.isValidSymbol(e));
+    const filteredProps = properties.filter((p) => ChemicalElement.isValidProperty(p));
 
     filteredProps.forEach((prop) => {
-        const pName = (propMap !== undefined) && propMap.hasOwnProperty(prop) ? propMap[prop] : prop;
+        const pName = (propertiesMap !== undefined) && propertiesMap.hasOwnProperty(prop) ? propertiesMap[prop] : prop;
         filteredElems.forEach((elem) => {
             const key = `${pName}${separator}${elem}`;
-            if (!Array.isArray(PERIODIC_TABLE[elem][prop])) {
-                allProperties.push({ [key]: PERIODIC_TABLE[elem][prop] });
+            const val = PERIODIC_TABLE[elem][prop];
+            if (val !== null && val !== "" && !Array.isArray(val)) {
+                allProperties.push({ [key]: val });
             }
         });
     });
