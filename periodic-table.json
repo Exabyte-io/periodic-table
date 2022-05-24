@@ -2475,9 +2475,7 @@
         "name": "Rutherfordium",
         "symbol": "Rf",
         "atomic_number": 104,
-        "atomic_mass": [
-            261
-        ],
+        "atomic_mass": 267,
         "density_g_per_cm3": "",
         "melting_point_K": "",
         "boiling_point_K": "",
@@ -2501,9 +2499,7 @@
         "name": "Dubnium",
         "symbol": "Db",
         "atomic_number": 105,
-        "atomic_mass": [
-            262
-        ],
+        "atomic_mass": 270,
         "density_g_per_cm3": "",
         "melting_point_K": "",
         "boiling_point_K": "",
@@ -2527,9 +2523,7 @@
         "name": "Seaborgium",
         "symbol": "Sg",
         "atomic_number": 106,
-        "atomic_mass": [
-            266
-        ],
+        "atomic_mass": 269,
         "density_g_per_cm3": "",
         "melting_point_K": "",
         "boiling_point_K": "",
@@ -2553,9 +2547,7 @@
         "name": "Bohrium",
         "symbol": "Bh",
         "atomic_number": 107,
-        "atomic_mass": [
-            264
-        ],
+        "atomic_mass": 270,
         "density_g_per_cm3": "",
         "melting_point_K": "",
         "boiling_point_K": "",
@@ -2579,9 +2571,7 @@
         "name": "Hassium",
         "symbol": "Hs",
         "atomic_number": 108,
-        "atomic_mass": [
-            269
-        ],
+        "atomic_mass": 277,
         "density_g_per_cm3": "",
         "melting_point_K": "",
         "boiling_point_K": "",
@@ -2605,9 +2595,7 @@
         "name": "Meitnerium",
         "symbol": "Mt",
         "atomic_number": 109,
-        "atomic_mass": [
-            268
-        ],
+        "atomic_mass": 278,
         "density_g_per_cm3": "",
         "melting_point_K": "",
         "boiling_point_K": "",
@@ -2631,9 +2619,7 @@
         "name": "Darmstadtium",
         "symbol": "Ds",
         "atomic_number": 110,
-        "atomic_mass": [
-            269
-        ],
+        "atomic_mass": 281,
         "density_g_per_cm3": "",
         "melting_point_K": "",
         "boiling_point_K": "",
@@ -2657,9 +2643,7 @@
         "name": "Roentgenium",
         "symbol": "Rg",
         "atomic_number": 111,
-        "atomic_mass": [
-            272
-        ],
+        "atomic_mass": 282,
         "density_g_per_cm3": "",
         "melting_point_K": "",
         "boiling_point_K": "",
@@ -2683,9 +2667,7 @@
         "name": "Copernicium",
         "symbol": "Cn",
         "atomic_number": 112,
-        "atomic_mass": [
-            277
-        ],
+        "atomic_mass": 285,
         "density_g_per_cm3": "",
         "melting_point_K": "",
         "boiling_point_K": "",
@@ -2709,7 +2691,7 @@
         "name": "Nihonium",
         "symbol": "Nh",
         "atomic_number": 113,
-        "atomic_mass": "",
+        "atomic_mass": 286,
         "density_g_per_cm3": "",
         "melting_point_K": "",
         "boiling_point_K": "",
@@ -2733,9 +2715,7 @@
         "name": "Flerovium",
         "symbol": "Fl",
         "atomic_number": 114,
-        "atomic_mass": [
-            289
-        ],
+        "atomic_mass": 289,
         "density_g_per_cm3": "",
         "melting_point_K": "",
         "boiling_point_K": "",
@@ -2759,7 +2739,7 @@
         "name": "Moscovium",
         "symbol": "Mc",
         "atomic_number": 115,
-        "atomic_mass": "",
+        "atomic_mass": 290,
         "density_g_per_cm3": "",
         "melting_point_K": "",
         "boiling_point_K": "",
@@ -2783,7 +2763,7 @@
         "name": "Livermorium",
         "symbol": "Lv",
         "atomic_number": 116,
-        "atomic_mass": "",
+        "atomic_mass": 293,
         "density_g_per_cm3": "",
         "melting_point_K": "",
         "boiling_point_K": "",
@@ -2807,7 +2787,7 @@
         "name": "Tennessine",
         "symbol": "Ts",
         "atomic_number": 117,
-        "atomic_mass": "",
+        "atomic_mass": 294,
         "density_g_per_cm3": "",
         "melting_point_K": "",
         "boiling_point_K": "",
@@ -2831,7 +2811,7 @@
         "name": "Oganesson",
         "symbol": "Og",
         "atomic_number": 118,
-        "atomic_mass": "",
+        "atomic_mass": 294,
         "density_g_per_cm3": "",
         "melting_point_K": "",
         "boiling_point_K": "",
