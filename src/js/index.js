@@ -1,15 +1,11 @@
-import _ from "underscore";
-
 import { ELEMENT_BONDS } from "./element_bonds";
 import { ELEMENT_COLORS } from "./element_colors";
-import { ELEMENT_VDW_RADII } from "./element_vdwRadii";
 import { PERIODIC_TABLE } from "./periodic_table";
 import { Element } from "./element";
 
 export { ELEMENT_BONDS };
 export { PERIODIC_TABLE };
 export { ELEMENT_COLORS };
-export { ELEMENT_VDW_RADII };
 export { Element };
 
 /**
