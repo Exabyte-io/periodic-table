@@ -4,20 +4,13 @@ import { ELEMENT_BONDS } from "./element_bonds";
 import { ELEMENT_COLORS } from "./element_colors";
 import { ELEMENT_VDW_RADII } from "./element_vdwRadii";
 import { PERIODIC_TABLE } from "./periodic_table";
+import { Element } from "./element";
 
 export { ELEMENT_BONDS };
 export { PERIODIC_TABLE };
 export { ELEMENT_COLORS };
 export { ELEMENT_VDW_RADII };
-
-export const ELEMENTS_BY_SYMBOL = _.reduce(
-    PERIODIC_TABLE,
-    (memo, item) => {
-        memo[item.symbol] = item;
-        return memo;
-    },
-    {},
-);
+export { Element };
 
 /**
  * Returns element electronegativity by symbol.
@@ -25,7 +18,7 @@ export const ELEMENTS_BY_SYMBOL = _.reduce(
  * @returns {number}
  */
 export function getElectronegativity(symbol) {
-    const config = ELEMENTS_BY_SYMBOL[symbol];
+    const config = PERIODIC_TABLE[symbol];
     return config ? config.pauling_negativity : 0; // return zero if value cannot be accessed by symbol
 }
 
@@ -59,8 +52,8 @@ export function filterBondsDataByElementsAndOrder(
  * @returns {Object}
  */
 export function defaultElementsBondsDataEntry(element1, element2, order = undefined) {
-    const element1CovalentRadius = ELEMENTS_BY_SYMBOL[element1].covalent_radius_pm / 100;
-    const element2CovalentRadius = ELEMENTS_BY_SYMBOL[element2].covalent_radius_pm / 100;
+    const element1CovalentRadius = PERIODIC_TABLE[element1].covalent_radius_pm / 100;
+    const element2CovalentRadius = PERIODIC_TABLE[element2].covalent_radius_pm / 100;
     return {
         elements: [element1, element2],
         energy: {
@@ -101,11 +94,34 @@ export function getElementsBondsData(element1, element2, order = undefined) {
  * @returns {Number}
  */
 export function getElementAtomicRadius(elementSymbol) {
-    const elementName = Object.keys(PERIODIC_TABLE).find(
-        (key) => elementSymbol === PERIODIC_TABLE[key].symbol,
-    );
-    if (elementName) {
-        return PERIODIC_TABLE[elementName].atomic_radius_pm * 0.01;
+    const config = PERIODIC_TABLE[elementSymbol];
+    if (config) {
+        return PERIODIC_TABLE[elementSymbol].atomic_radius_pm / 100;
     }
     return 1.0;
+}
+
+/**
+ *
+ * @param elements {String[]} - List of elements (as symbols)
+ * @param properties {String[]} - List of properties
+ * @param propMap {Object} - Object mapping property names to custom names (e.g. {'atomic_radius_pm': 'radius'})
+ * @param separator {String} - Separator string for the suffix (default: ':')
+ * @returns {Object[]} - List of Objects {property_key: property_value}
+ */
+export function getAtomicPropertiesFlat(elements, properties, propMap, separator = ":") {
+    const allProperties = [];
+    const filteredElems = elements.filter((e) => Element.isValidSymbol(e));
+    const filteredProps = properties.filter((p) => Element.isValidProperty(p));
+
+    filteredProps.forEach((prop) => {
+        const pName = (propMap !== undefined) && propMap.hasOwnProperty(prop) ? propMap[prop] : prop;
+        filteredElems.forEach((elem) => {
+            const key = `${pName}${separator}${elem}`;
+            if (!Array.isArray(PERIODIC_TABLE[elem][prop])) {
+                allProperties.push({ [key]: PERIODIC_TABLE[elem][prop] });
+            }
+        });
+    });
+    return allProperties;
 }
