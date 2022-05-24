@@ -3,12 +3,11 @@ import { expect } from "chai";
 import {
     defaultElementsBondsDataEntry,
     ELEMENT_COLORS,
-    ELEMENT_VDW_RADII,
-    ELEMENTS_BY_SYMBOL,
     filterBondsDataByElementsAndOrder,
     getElectronegativity,
     getElementsBondsData,
     PERIODIC_TABLE,
+    Element,
 } from "../../lib/js/index";
 
 const testCases = [
@@ -16,21 +15,24 @@ const testCases = [
     { el1: "C", el2: "H", name1: "Carbon", vdw: "number", maxOrder: 1 },
     { el1: "N", el2: "H", name1: "Nitrogen", vdw: "number", maxOrder: 1 },
     { el1: "C", el2: "C", name1: "Carbon", vdw: "number", maxOrder: 3 },
-    { el1: "U", el2: "U", name1: "Uranium", vdw: "undefined", maxOrder: undefined },
+    { el1: "Lr", el2: "Lr", name1: "Lawrencium", vdw: "string", maxOrder: undefined },
 ];
 
 testCases.forEach(({ el1, name1, vdw }) => {
     describe("Element:Data", () => {
         it("should return element data", () => {
-            const data = ELEMENTS_BY_SYMBOL[el1];
+            const data = PERIODIC_TABLE[el1];
             expect(data.symbol).equal(el1);
-            const other = PERIODIC_TABLE[name1];
-            expect(data).equal(other);
+            expect(data.name).equal(name1);
+            const elem = new Element(el1.toLowerCase());
+            expect(elem.symbol).equal(el1);
+            expect(Element.isValidSymbol(el1)).to.be.true;
+            expect(Element.isValidName(name1)).to.be.true;
             const color = ELEMENT_COLORS[el1];
             expect(color)
                 .to.be.a("string")
                 .and.satisfy((c) => c.startsWith("#"));
-            const radius = ELEMENT_VDW_RADII[el1];
+            const radius = PERIODIC_TABLE[el1].van_der_Waals_radius_pm;
             expect(radius).to.be.a(vdw);
         });
     });
