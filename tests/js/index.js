@@ -149,7 +149,13 @@ const propertyListCases = [
 propertyListCases.forEach(({ elm, props, propMap, res }) => {
     describe("PropertyList", () => {
         it("should generate list", () => {
-            expect(getAtomicPropertiesFlat(elm, props, propMap)).to.deep.equal(res);
+            expect(
+                getAtomicPropertiesFlat({
+                    elements: elm,
+                    properties: props,
+                    propertiesMap: propMap,
+                }),
+            ).to.deep.equal(res);
         });
     });
 });

@@ -101,10 +101,11 @@ export function getElementAtomicRadius(elementSymbol) {
 
 /**
  *
- * @param elements {String[]} - List of elements (as symbols)
- * @param properties {String[]} - List of properties
- * @param propertiesMap {Object} - Object mapping property names to custom names (e.g. {'atomic_radius_pm': 'radius'})
- * @param separator {String} - Separator string for the suffix (default: ':')
+ * @param obj {Object}
+ * @param obj.elements {String[]} - List of elements (as symbols)
+ * @param obj.properties {String[]} - List of properties
+ * @param obj.propertiesMap {Object} - Object mapping property names to custom names (e.g. `{'atomic_radius_pm': 'radius'}`)
+ * @param obj.separator {String} - Separator string for the suffix (default: ':')
  * @returns {Object[]} - List of Objects {property_key: property_value}
  * @example
  * getAtomicPropertiesFlat(
@@ -112,21 +113,22 @@ export function getElementAtomicRadius(elementSymbol) {
  *     ["atomic_radius_pm", "atomic_number", "pauling_negativity"],
  *     { atomic_radius_pm: "atomic_radius" }
  * );
- * // returns [
- * //  { 'atomic_radius:H': 25 },
- * //  { 'atomic_radius:Na': 180 },
- * //  { 'atomic_number:H': 1 },
- * //  { 'atomic_number:Na': 11 },
- * //  { 'pauling_negativity:H': 2.2 },
- * //  { 'pauling_negativity:Na': 0.93 },
- * // ]
+ * // returns
+ * [
+ *     { 'atomic_radius:H': 25 },
+ *     { 'atomic_radius:Na': 180 },
+ *     { 'atomic_number:H': 1 },
+ *     { 'atomic_number:Na': 11 },
+ *     { 'pauling_negativity:H': 2.2 },
+ *     { 'pauling_negativity:Na': 0.93 }
+ * ]
  */
-export function getAtomicPropertiesFlat(
+export function getAtomicPropertiesFlat({
     elements,
     properties,
     propertiesMap = undefined,
     separator = ":",
-) {
+}) {
     const allProperties = [];
     const filteredElems = elements.filter((e) => ChemicalElement.isValidSymbol(e));
     const filteredProps = properties.filter((p) => ChemicalElement.isValidProperty(p));
