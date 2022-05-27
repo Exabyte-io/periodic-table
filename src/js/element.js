@@ -52,7 +52,7 @@ export class ChemicalElement {
      * @returns {number|undefined}
      */
     get atomicRadius() {
-        if (Number.isFinite(this._properties.atomic_radius_pm)) {
+        if (typeof this._properties.atomic_radius_pm) {
             return this._properties.atomic_radius_pm;
         }
     }
@@ -72,7 +72,7 @@ export class ChemicalElement {
      * @returns {number|undefined}
      */
     get vanDerWaalsRadius() {
-        if (Number.isFinite(this._properties.van_der_Waals_radius_pm)) {
+        if (typeof this._properties.van_der_Waals_radius_pm) {
             return this._properties.van_der_Waals_radius_pm;
         }
     }
@@ -91,7 +91,7 @@ export class ChemicalElement {
      * @returns {number|undefined}
      */
     get ionizationPotential() {
-        if (Number.isFinite(this._properties.first_ionizing_kJ_mol)) {
+        if (typeof this._properties.first_ionizing_kJ_mol) {
             return (
                 this._properties.first_ionizing_kJ_mol /
                 CONVERSION.energy[UNITS.energy.electronvolt][UNITS.energy.kJ_mol]

@@ -42,11 +42,11 @@ export const CONVERSION = {
     },
     energy: {
         [UNITS.energy.hartree]: {
-            [UNITS.energy.electronvolt]:  27.211386245988,
+            [UNITS.energy.electronvolt]: 27.211386245988,
             [UNITS.energy.kJ_mol]: 2625.4996394799,
             [UNITS.energy.kcal_mol]: 627.5094740631,
             [UNITS.energy.joule]: 4.3597447222071e-18,
-            [UNITS.energy.wavenumber]: 219474.63136320,
+            [UNITS.energy.wavenumber]: 219474.6313632,
         },
         [UNITS.energy.electronvolt]: {
             [UNITS.energy.kJ_mol]: 96.48533212331287,
@@ -56,7 +56,7 @@ export const CONVERSION = {
     },
     mass: {
         [UNITS.mass.atomicMassUnit]: {
-            [UNITS.mass.kilogram]: 1.6605390660e-27,
+            [UNITS.mass.kilogram]: 1.660539066e-27,
             [UNITS.mass.dalton]: 1,
         },
     },
