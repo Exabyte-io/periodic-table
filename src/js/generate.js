@@ -21,11 +21,6 @@ const rootDir = path.resolve(__dirname, "../../");
         dstFileName: "periodic_table.js",
         variableName: "PERIODIC_TABLE",
     },
-    {
-        srcFileName: "element-vdwRadii.json",
-        dstFileName: "element_vdwRadii.js",
-        variableName: "ELEMENT_VDW_RADII",
-    },
 ].forEach((config) => {
     const data = fs.readFileSync(path.resolve(rootDir, config.srcFileName), "utf8");
     const content = [
