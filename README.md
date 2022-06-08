@@ -18,11 +18,11 @@ npm install @exabyte-io/periodic-table.js
 ## Usage
 
 ```javascript
-import {PERIODIC_TABLE, Element} from "@exabyte-io/periodic-table.js";
+import {PERIODIC_TABLE, ChemicalElement} from "@exabyte-io/periodic-table.js";
 
 console.log(PERIODIC_TABLE.H);
 
-const li = new Element("Li");
+const li = new ChemicalElement("Li");
 console.log(li.atomicRadiusIn("bohr"));
 ```
 
