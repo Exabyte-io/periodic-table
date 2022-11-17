@@ -1,6 +1,6 @@
 import { ELEMENT_COLORS } from "./element_colors";
 import { PERIODIC_TABLE } from "./periodic_table.js";
-import { CONVERSION, UNITS, convertUnit } from "./units";
+import { CONVERSION, convertUnit, UNITS } from "./units";
 
 export class ChemicalElement {
     /**
@@ -112,12 +112,13 @@ export class ChemicalElement {
     }
 
     static getColorBySymbol(symbol) {
-        return (this.colors[symbol] || "#999");
+        return this.colors[symbol] || "#999";
     }
 
     static isValidName(elementName) {
         return (
-            Object.keys(PERIODIC_TABLE).find((key) => PERIODIC_TABLE[key].name === elementName) !== undefined
+            Object.keys(PERIODIC_TABLE).find((key) => PERIODIC_TABLE[key].name === elementName) !==
+            undefined
         );
     }
 
@@ -129,10 +130,13 @@ export class ChemicalElement {
      */
     static isValidSymbol(symbol, caseSensitive = false) {
         if (!caseSensitive) {
-            return Object.keys(PERIODIC_TABLE).map((s) => s.toLowerCase()).indexOf(symbol.toLowerCase()) > -1;
-        } else {
-            return PERIODIC_TABLE.hasOwnProperty(symbol);
+            return (
+                Object.keys(PERIODIC_TABLE)
+                    .map((s) => s.toLowerCase())
+                    .indexOf(symbol.toLowerCase()) > -1
+            );
         }
+        return PERIODIC_TABLE.hasOwnProperty(symbol);
     }
 
     /**

@@ -1,7 +1,7 @@
+import { ChemicalElement } from "./element";
 import { ELEMENT_BONDS } from "./element_bonds";
 import { ELEMENT_COLORS } from "./element_colors";
 import { PERIODIC_TABLE } from "./periodic_table";
-import { ChemicalElement } from "./element";
 import { UNITS } from "./units";
 
 export { ELEMENT_BONDS };
@@ -134,7 +134,10 @@ export function getAtomicPropertiesFlat({
     const filteredProps = properties.filter((p) => ChemicalElement.isValidProperty(p));
 
     filteredProps.forEach((prop) => {
-        const pName = (propertiesMap !== undefined) && propertiesMap.hasOwnProperty(prop) ? propertiesMap[prop] : prop;
+        const pName =
+            propertiesMap !== undefined && propertiesMap.hasOwnProperty(prop)
+                ? propertiesMap[prop]
+                : prop;
         filteredElems.forEach((elem) => {
             const key = `${pName}${separator}${elem}`;
             const val = PERIODIC_TABLE[elem][prop];

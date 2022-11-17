@@ -38,7 +38,7 @@ export const CONVERSION = {
         [UNITS.length.bohr]: {
             [UNITS.length.picometer]: 52.9177210903,
             [UNITS.length.angstrom]: 0.529177210903,
-        }
+        },
     },
     energy: {
         [UNITS.energy.hartree]: {
@@ -89,7 +89,8 @@ export const CONVERSION = {
  *  );
  *  // returns 27.21138
  */
-export function convertUnit(value,
+export function convertUnit(
+    value,
     {
         from = UNITS.energy.electronvolt,
         to = UNITS.energy.electronvolt,
@@ -98,14 +99,16 @@ export function convertUnit(value,
 ) {
     if (typeof value !== "number") {
         return undefined;
-    } else if (from === to) {
-        return value;
-    } else if (conversionTree.hasOwnProperty(from) && conversionTree[from].hasOwnProperty(to)) {
-        return value * conversionTree[from][to];
-    } else if (conversionTree.hasOwnProperty(to) && conversionTree[to].hasOwnProperty(from)) {
-        return value / conversionTree[to][from];
-    } else {
-        console.warn([value, from, to], "Unable to convert unit of energy!");
-        return undefined;
     }
+    if (from === to) {
+        return value;
+    }
+    if (conversionTree.hasOwnProperty(from) && conversionTree[from].hasOwnProperty(to)) {
+        return value * conversionTree[from][to];
+    }
+    if (conversionTree.hasOwnProperty(to) && conversionTree[to].hasOwnProperty(from)) {
+        return value / conversionTree[to][from];
+    }
+    console.warn([value, from, to], "Unable to convert unit of energy!");
+    return undefined;
 }
