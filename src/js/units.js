@@ -1,3 +1,4 @@
+/* eslint-disable no-prototype-builtins */
 export const UNITS = {
     length: {
         angstrom: "ang",

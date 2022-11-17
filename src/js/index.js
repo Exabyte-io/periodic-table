@@ -1,3 +1,5 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import { ChemicalElement } from "./element";
 import { ELEMENT_BONDS } from "./element_bonds";
 import { ELEMENT_COLORS } from "./element_colors";
@@ -135,6 +137,7 @@ export function getAtomicPropertiesFlat({
 
     filteredProps.forEach((prop) => {
         const pName =
+            // eslint-disable-next-line no-prototype-builtins
             propertiesMap !== undefined && propertiesMap.hasOwnProperty(prop)
                 ? propertiesMap[prop]
                 : prop;

@@ -47,7 +47,9 @@ testCases.forEach(({ el1, name1, vdw }) => {
             const data = PERIODIC_TABLE[el1];
             expect(data.symbol).equal(el1);
             expect(data.name).equal(name1);
+            // eslint-disable-next-line no-unused-expressions
             expect(ChemicalElement.isValidSymbol(el1)).to.be.true;
+            // eslint-disable-next-line no-unused-expressions
             expect(ChemicalElement.isValidName(name1)).to.be.true;
             const color = ELEMENT_COLORS[el1];
             expect(color)

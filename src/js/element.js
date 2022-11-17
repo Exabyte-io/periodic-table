@@ -1,3 +1,7 @@
+/* eslint-disable import/extensions */
+/* eslint-disable getter-return */
+/* eslint-disable no-constant-condition */
+/* eslint-disable import/no-unresolved */
 import { ELEMENT_COLORS } from "./element_colors";
 import { PERIODIC_TABLE } from "./periodic_table.js";
 import { CONVERSION, convertUnit, UNITS } from "./units";
@@ -136,6 +140,7 @@ export class ChemicalElement {
                     .indexOf(symbol.toLowerCase()) > -1
             );
         }
+        // eslint-disable-next-line no-prototype-builtins
         return PERIODIC_TABLE.hasOwnProperty(symbol);
     }
 
@@ -145,6 +150,7 @@ export class ChemicalElement {
      * @returns {boolean}
      */
     static isValidProperty(prop) {
+        // eslint-disable-next-line no-prototype-builtins
         return PERIODIC_TABLE.H.hasOwnProperty(prop);
     }
 }
