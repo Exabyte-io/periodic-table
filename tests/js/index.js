@@ -1,23 +1,44 @@
 import { expect } from "chai";
 
 import {
+    ChemicalElement,
     defaultElementsBondsDataEntry,
     ELEMENT_COLORS,
     filterBondsDataByElementsAndOrder,
+    getAtomicPropertiesFlat,
     getElectronegativity,
     getElementsBondsData,
     PERIODIC_TABLE,
-    ChemicalElement,
-    getAtomicPropertiesFlat,
     UNITS,
 } from "../../lib/js/index";
 
 const testCases = [
-    { el1: "H", el2: "H", name1: "Hydrogen", vdw: "number", maxOrder: 1, atomicRadiusBohr: 0.47243 },
+    {
+        el1: "H",
+        el2: "H",
+        name1: "Hydrogen",
+        vdw: "number",
+        maxOrder: 1,
+        atomicRadiusBohr: 0.47243,
+    },
     { el1: "C", el2: "H", name1: "Carbon", vdw: "number", maxOrder: 1, atomicRadiusBohr: 1.32281 },
-    { el1: "N", el2: "H", name1: "Nitrogen", vdw: "number", maxOrder: 1, atomicRadiusBohr: 1.22832 },
+    {
+        el1: "N",
+        el2: "H",
+        name1: "Nitrogen",
+        vdw: "number",
+        maxOrder: 1,
+        atomicRadiusBohr: 1.22832,
+    },
     { el1: "C", el2: "C", name1: "Carbon", vdw: "number", maxOrder: 3, atomicRadiusBohr: 1.32281 },
-    { el1: "Lr", el2: "Lr", name1: "Lawrencium", vdw: "string", maxOrder: undefined, atomicRadiusBohr: undefined },
+    {
+        el1: "Lr",
+        el2: "Lr",
+        name1: "Lawrencium",
+        vdw: "string",
+        maxOrder: undefined,
+        atomicRadiusBohr: undefined,
+    },
 ];
 
 testCases.forEach(({ el1, name1, vdw }) => {
@@ -26,7 +47,9 @@ testCases.forEach(({ el1, name1, vdw }) => {
             const data = PERIODIC_TABLE[el1];
             expect(data.symbol).equal(el1);
             expect(data.name).equal(name1);
+            // eslint-disable-next-line no-unused-expressions
             expect(ChemicalElement.isValidSymbol(el1)).to.be.true;
+            // eslint-disable-next-line no-unused-expressions
             expect(ChemicalElement.isValidName(name1)).to.be.true;
             const color = ELEMENT_COLORS[el1];
             expect(color)
@@ -78,9 +101,27 @@ testCases.forEach(({ el1, el2, maxOrder }) => {
 });
 
 const classPropertyCases = [
-    { el: "Li", mass_kg: 1.153e-26, atomicRadius_bohr: 2.74010, vdwRadius_ang: 1.82, IP_hartree: 0.19802 },
-    { el: "N", mass_kg: 2.326e-26, atomicRadius_bohr: 1.22832, vdwRadius_ang: 1.55, IP_hartree: 0.53380 },
-    { el: "I", mass_kg: 2.107e-25, atomicRadius_bohr: 2.64562, vdwRadius_ang: 1.98, IP_hartree: 0.38404 },
+    {
+        el: "Li",
+        mass_kg: 1.153e-26,
+        atomicRadius_bohr: 2.7401,
+        vdwRadius_ang: 1.82,
+        IP_hartree: 0.19802,
+    },
+    {
+        el: "N",
+        mass_kg: 2.326e-26,
+        atomicRadius_bohr: 1.22832,
+        vdwRadius_ang: 1.55,
+        IP_hartree: 0.5338,
+    },
+    {
+        el: "I",
+        mass_kg: 2.107e-25,
+        atomicRadius_bohr: 2.64562,
+        vdwRadius_ang: 1.98,
+        IP_hartree: 0.38404,
+    },
 ];
 
 classPropertyCases.forEach(({ el }) => {
@@ -100,7 +141,7 @@ classPropertyCases.forEach(({ el }) => {
     });
 });
 
-classPropertyCases.forEach(({ el, mass_kg, atomicRadius_bohr, vdwRadius_ang, IP_hartree}) => {
+classPropertyCases.forEach(({ el, mass_kg, atomicRadius_bohr, vdwRadius_ang, IP_hartree }) => {
     describe("ChemicalElement:Data", () => {
         it("should convert units", () => {
             const elem = new ChemicalElement(el);
@@ -111,19 +152,28 @@ classPropertyCases.forEach(({ el, mass_kg, atomicRadius_bohr, vdwRadius_ang, IP_
             }
             // atomic radius
             if (typeof atomicRadius_bohr === "number") {
-                expect(elem.atomicRadiusInUnits(UNITS.length.bohr)).to.be.closeTo(atomicRadius_bohr, 1e-3);
+                expect(elem.atomicRadiusInUnits(UNITS.length.bohr)).to.be.closeTo(
+                    atomicRadius_bohr,
+                    1e-3,
+                );
             } else {
                 expect(elem.atomicRadiusInUnits(UNITS.length.bohr)).to.be.a("undefined");
             }
             // vdW radius
             if (typeof vdwRadius_ang === "number") {
-                expect(elem.vanDerWaalsRadiusInUnits(UNITS.length.angstrom)).to.be.closeTo(vdwRadius_ang, 1e-2);
+                expect(elem.vanDerWaalsRadiusInUnits(UNITS.length.angstrom)).to.be.closeTo(
+                    vdwRadius_ang,
+                    1e-2,
+                );
             } else {
                 expect(elem.vanDerWaalsRadiusInUnits(UNITS.length.angstrom)).to.be.a("undefined");
             }
             // ionization potential
             if (typeof IP_hartree === "number") {
-                expect(elem.ionizationPotentialInUnits(UNITS.energy.hartree)).to.be.closeTo(IP_hartree, 1e-3);
+                expect(elem.ionizationPotentialInUnits(UNITS.energy.hartree)).to.be.closeTo(
+                    IP_hartree,
+                    1e-3,
+                );
             } else {
                 expect(elem.ionizationPotentialInUnits(UNITS.energy.hartree)).to.be.a("undefined");
             }
