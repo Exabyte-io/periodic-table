@@ -54,3 +54,30 @@ jobs:
           node-version: 12.21.x
           npm-token: ${{ secrets.NPM_TOKEN }}
           github-token: ${{ secrets.BOT_GITHUB_TOKEN }}
+
+  run-py-tests:
+    needs: run-py-linter
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        python-version: [3.8.6]
+
+    steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v3
+        with:
+          lfs: true
+
+      - name: Checkout actions repository
+        uses: actions/checkout@v3
+        with:
+          repository: Exabyte-io/actions
+          token: ${{ secrets.BOT_GITHUB_TOKEN }}
+          path: actions
+
+      - name: Run python unit tests
+        uses: ./actions/py/test
+        with:
+          python-version: ${{ matrix.python-version }}
+          unit-test-directory: tests/py/unit
+          bot-ssh-key: ${{ secrets.BOT_GITHUB_KEY }}

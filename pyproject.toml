@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=42", "wheel", "setuptools_scm[toml]>=3.4"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mat3ra"
+dynamic = ["version"]
+description = "Data for the Periodic Table of Elements"
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [{ name = "Exabyte Inc.", email = "info@mat3ra.com" }]
+dependencies = [
+    ## Add here
+    # "drmaa>=0.7.6",
+]
+
+[project.optional-dependencies]
+tests = ["coverage[toml]>=5.3"]
+all = ["mat3ra[tests]"]
+
+# Add below if needed
+# [project.scripts]
+# alfred = "alfred.server:start_server"
+
+[tool.setuptools.packages.find]
+where = ["src/py"]
+
+[tool.setuptools_scm]
+git_describe_command = 'git describe --tags --long'
+
+[tool.coverage.run]
+source = ['.']
+omit = ['env*/*', 'venv*/*', 'tests/*']
