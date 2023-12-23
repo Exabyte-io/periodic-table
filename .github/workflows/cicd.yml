@@ -56,7 +56,6 @@ jobs:
           github-token: ${{ secrets.BOT_GITHUB_TOKEN }}
 
   run-py-tests:
-    needs: run-py-linter
     runs-on: ubuntu-20.04
     strategy:
       matrix:
