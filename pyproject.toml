@@ -3,7 +3,7 @@ requires = ["setuptools>=42", "wheel", "setuptools_scm[toml]>=3.4"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mat3ra_periodic_table"
+name = "mat3ra-periodic-table"
 dynamic = ["version"]
 description = "Data for the Periodic Table of Elements"
 readme = "README.md"
@@ -16,7 +16,7 @@ dependencies = [
 
 [project.optional-dependencies]
 tests = ["coverage[toml]>=5.3"]
-all = ["mat3ra_periodic_table[tests]"]
+all = ["mat3ra-periodic-table[tests]"]
 
 [tool.setuptools.packages.find]
 where = ["src/py"]
