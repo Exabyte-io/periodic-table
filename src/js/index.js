@@ -1,9 +1,8 @@
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
+import ELEMENT_BONDS from "../../element-bonds.json";
+import ELEMENT_COLORS from "../../element-colors.json";
+import PERIODIC_TABLE from "../../periodic-table.json";
+// eslint-disable-next-line import/no-cycle
 import { ChemicalElement } from "./element";
-import { ELEMENT_BONDS } from "./element_bonds";
-import { ELEMENT_COLORS } from "./element_colors";
-import { PERIODIC_TABLE } from "./periodic_table";
 import { UNITS } from "./units";
 
 export { ELEMENT_BONDS };

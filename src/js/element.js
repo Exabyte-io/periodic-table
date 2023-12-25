@@ -1,9 +1,5 @@
-/* eslint-disable import/extensions */
-/* eslint-disable getter-return */
-/* eslint-disable no-constant-condition */
-/* eslint-disable import/no-unresolved */
-import { ELEMENT_COLORS } from "./element_colors";
-import { PERIODIC_TABLE } from "./periodic_table.js";
+// eslint-disable-next-line import/no-cycle
+import { ELEMENT_COLORS, PERIODIC_TABLE } from "./index";
 import { CONVERSION, convertUnit, UNITS } from "./units";
 
 export class ChemicalElement {
@@ -42,6 +38,7 @@ export class ChemicalElement {
         if (typeof this._properties.atomic_mass === "number") {
             return this._properties.atomic_mass;
         }
+        return undefined;
     }
 
     massInUnits(unit) {
@@ -56,9 +53,10 @@ export class ChemicalElement {
      * @returns {number|undefined}
      */
     get atomicRadius() {
-        if (typeof this._properties.atomic_radius_pm) {
+        if (typeof this._properties.atomic_radius_pm === "number") {
             return this._properties.atomic_radius_pm;
         }
+        return undefined;
     }
 
     atomicRadiusInUnits(unit) {
@@ -76,9 +74,10 @@ export class ChemicalElement {
      * @returns {number|undefined}
      */
     get vanDerWaalsRadius() {
-        if (typeof this._properties.van_der_Waals_radius_pm) {
+        if (typeof this._properties.van_der_Waals_radius_pm === "number") {
             return this._properties.van_der_Waals_radius_pm;
         }
+        return undefined;
     }
 
     vanDerWaalsRadiusInUnits(unit) {
@@ -95,12 +94,13 @@ export class ChemicalElement {
      * @returns {number|undefined}
      */
     get ionizationPotential() {
-        if (typeof this._properties.first_ionizing_kJ_mol) {
+        if (typeof this._properties.first_ionizing_kJ_mol === "number") {
             return (
                 this._properties.first_ionizing_kJ_mol /
                 CONVERSION.energy[UNITS.energy.electronvolt][UNITS.energy.kJ_mol]
             );
         }
+        return undefined;
     }
 
     ionizationPotentialInUnits(unit) {
