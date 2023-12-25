@@ -1,10 +1,10 @@
 {
-    "name": "@exabyte-io/periodic-table.js",
-    "version": "2021.12.21-6",
+    "name": "@mat3ra/periodic-table",
+    "version": "0.0.0",
     "description": "Data about chemical elements arranged in JSON format",
     "scripts": {
         "prepublishOnly": "rm -rf lib; npm run transpile",
-        "transpile": "mkdir -p lib && babel src --out-dir lib && node lib/js/generate.js",
+        "transpile": "mkdir -p lib && babel src --out-dir lib",
         "test": "npm run transpile; nyc --reporter=text mocha --recursive --bail --require @babel/register/lib tests",
         "postinstall": "npm run transpile",
         "lint": "eslint src tests && prettier --write src tests",
