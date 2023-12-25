@@ -116,7 +116,7 @@ jobs:
       - name: Publish python release
         uses: ./actions/py/publish
         with:
-          python-version: 3.8.6
+          python-version: 3.x
           github-token: ${{ secrets.BOT_GITHUB_TOKEN }}
           pypi-username: ${{ secrets.PYPI_USERNAME }}
           pypi-password: ${{ secrets.PYPI_PASSWORD }}
