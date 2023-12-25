@@ -96,7 +96,7 @@ jobs:
 
 
   publish-py-package:
-    needs: [run-py-tests, publish-js-package]
+    needs: [run-py-tests]
     runs-on: ubuntu-latest
     if: github.ref_name == 'dev'
 
@@ -120,4 +120,5 @@ jobs:
           github-token: ${{ secrets.BOT_GITHUB_TOKEN }}
           pypi-username: ${{ secrets.PYPI_USERNAME }}
           pypi-password: ${{ secrets.PYPI_PASSWORD }}
+          # Tag is created by the publish action for JS package
           publish-tag: 'false'
