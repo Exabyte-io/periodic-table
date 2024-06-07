@@ -27,3 +27,8 @@ git_describe_command = 'git describe --tags --long'
 [tool.coverage.run]
 source = ['.']
 omit = ['env*/*', 'venv*/*', 'tests/*']
+
+[tool.setuptools.package-data]
+"*" = [
+    "*.json"
+]
