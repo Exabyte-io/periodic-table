@@ -45,8 +45,19 @@ console.log(li.atomicRadiusIn("bohr"));
 
 ```python
 from mat3ra.periodic_table import PERIODIC_TABLE
+from mat3ra.periodic_table.bonds import ELEMENT_BONDS
+from mat3ra.periodic_table.colors import ELEMENT_COLORS
 
-console.log(PERIODIC_TABLE.H);
+assert PERIODIC_TABLE["H"]["name"] == "Hydrogen"
+assert PERIODIC_TABLE["H"]["atomic_radius_pm"] == 25
+
+bond = next(b for b in ELEMENT_BONDS if b["elements"] == ["H", "O"])
+assert bond["energy"]["value"] == 4.75721615
+assert bond["energy"]["units"] == "eV"
+assert bond["length"]["value"] == 0.96
+assert bond["length"]["units"] == "angstrom"
+
+assert ELEMENT_COLORS["H"] == "#FFFFFF"  # white
 ```
 
 
@@ -73,7 +84,7 @@ This repository is an [open-source](LICENSE.md) work-in-progress and we welcome 
 
 ## 6. ToDos
 
-- Add python code to make this repository into a python package
+- Add pre-commit hook to run `python build_modules.py` before commit
 
 
 ## 7. Links

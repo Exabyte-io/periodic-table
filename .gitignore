@@ -127,7 +127,7 @@ celerybeat.pid
 
 # Environments
 .env
-.venv
+.venv*
 env/
 venv/
 ENV/
@@ -175,3 +175,5 @@ node_modules/
 
 ########### GENERAL #############
 *.DS_Store
+
+
