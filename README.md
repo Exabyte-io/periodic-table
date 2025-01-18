@@ -4,10 +4,8 @@
 
 # Periodic Table
 
-Data about chemical elements arranged in JSON format. The module also contains a `Element` class for convenient access
-to unit conversion of atomic properties (see example below).
-
-The package has a dual-nature as both a Python and a Node.js package.
+Data about chemical elements arranged in JSON format. The module also contains modules for accessing
+data in both Python and JavaScript/TypeScript.
 
 ## 1. Installation
 
