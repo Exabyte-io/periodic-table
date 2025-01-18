@@ -3,54 +3,6 @@ from mat3ra.periodic_table import PERIODIC_TABLE
 from mat3ra.periodic_table.bonds import ELEMENT_BONDS
 from mat3ra.periodic_table.colors import ELEMENT_COLORS
 
-BONDS = [
-    {
-        "elements": [
-            "H",
-            "H"
-        ],
-        "energy": {
-            "value": 4.4773799,
-            "units": "eV"
-        },
-        "length": {
-            "value": 0.74,
-            "units": "angstrom"
-        },
-        "order": 1
-    },
-    {
-        "elements": [
-            "H",
-            "B"
-        ],
-        "energy": {
-            "value": 4.03171477,
-            "units": "eV"
-        },
-        "length": {
-            "value": 1.19,
-            "units": "angstrom"
-        },
-        "order": 1
-    },
-    {
-        "elements": [
-            "H",
-            "C"
-        ],
-        "energy": {
-            "value": 4.25972949,
-            "units": "eV"
-        },
-        "length": {
-            "value": 1.09,
-            "units": "angstrom"
-        },
-        "order": 1
-    },
-]
-
 class TestBase(unittest.TestCase):
 
     def test_periodic_table(self):
