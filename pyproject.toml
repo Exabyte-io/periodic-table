@@ -9,10 +9,7 @@ description = "Data for the Periodic Table of Elements"
 readme = "README.md"
 requires-python = ">=3.8"
 authors = [{ name = "Exabyte Inc.", email = "info@mat3ra.com" }]
-dependencies = [
-    "mat3ra-code",
-    "mat3ra-esse",
-]
+dependencies = []
 
 [project.optional-dependencies]
 tests = ["pytest>=7.0", "coverage[toml]>=5.3"]
