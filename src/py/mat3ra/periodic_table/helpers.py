@@ -1,5 +1,4 @@
-from . import PERIODIC_TABLE as PERIODIC_TABLE_DATA
-
+from . import PERIODIC_TABLE
 
 
 def get_atomic_mass_from_element(element: str) -> float:
@@ -15,4 +14,9 @@ def get_atomic_mass_from_element(element: str) -> float:
     Raises:
         ValueError: If element symbol is not found
     """
+    symbol = element.strip().capitalize()
 
+    if symbol not in PERIODIC_TABLE:
+        raise ValueError(f"Element symbol '{element}' not found in periodic table")
+
+    return PERIODIC_TABLE[symbol]["atomic_mass"]
