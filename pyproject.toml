@@ -10,12 +10,12 @@ readme = "README.md"
 requires-python = ">=3.8"
 authors = [{ name = "Exabyte Inc.", email = "info@mat3ra.com" }]
 dependencies = [
-    ## Add here
-    # "drmaa>=0.7.6",
+    "mat3ra-code",
+    "mat3ra-esse",
 ]
 
 [project.optional-dependencies]
-tests = ["coverage[toml]>=5.3"]
+tests = ["pytest>=7.0", "coverage[toml]>=5.3"]
 all = ["mat3ra-periodic-table[tests]"]
 
 [tool.setuptools_scm]
@@ -58,7 +58,7 @@ include_trailing_comma = true
 
 [tool.pytest.ini_options]
 pythonpath = [
-    "deploymanager",
+    "src/py",
 ]
 testpaths = [
     "tests"
