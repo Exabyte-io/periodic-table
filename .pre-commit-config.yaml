@@ -1,0 +1,8 @@
+repos:
+  - repo: local
+    hooks:
+      - id: lint-staged
+        name: lint-staged
+        language: node
+        entry: npx lint-staged
+        verbose: true # to see familiar lint-staged output

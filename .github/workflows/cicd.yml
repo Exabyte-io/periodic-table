@@ -1,6 +1,6 @@
 name: CICD
 
-on: [push]
+on: [ push ]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -9,16 +9,14 @@ concurrency:
 jobs:
 
   run-py-tests:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         python-version:
           - 3.9.x
           - 3.10.x
           - 3.11.x
-          # Uncomment after fixing
-          # AttributeError: module 'pkgutil' has no attribute 'ImpImporter'. Did you mean: 'zipimporter'?
-          # - 3.12.x
+          - 3.12.x
 
     steps:
       - name: Checkout this repository
@@ -69,7 +67,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
   publish-js-package:
-    needs: [run-js-tests]
+    needs: [ run-js-tests ]
     runs-on: ubuntu-latest
     if: github.ref_name == 'dev'
 
@@ -94,7 +92,7 @@ jobs:
 
 
   publish-py-package:
-    needs: [run-py-tests]
+    needs: [ run-py-tests ]
     runs-on: ubuntu-latest
     if: github.ref_name == 'dev'
 
