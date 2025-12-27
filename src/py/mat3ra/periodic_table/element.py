@@ -1,39 +1,32 @@
-from typing import Dict, Any
+from typing import Any, Dict
 
-from mat3ra.esse.models.element import ElementSchema
+from mat3ra.code.entity import InMemoryEntityPydantic
+from mat3ra.esse.models.element import ElementSchema, Symbol
+from pydantic import Field
 
 
-class ChemicalElement:
-    """
-    Wrapper around ESSE ElementSchema with convenient access to periodic table data.
-    """
+class ChemicalElement(ElementSchema, InMemoryEntityPydantic):
+    name: str
+    atomic_number: int
+    atomic_mass: float
+    _data: Dict[str, Any] = Field(default_factory=dict, exclude=True, repr=False)
 
-    def __init__(self, symbol: str, data: Dict[str, Any]):
-        self.symbol = symbol
-        self._data = data
-        self._schema: ElementSchema = ElementSchema(symbol=symbol, properties=[])
-
-    @property
-    def name(self) -> str:
-        return self._data["name"]
-
-    @property
-    def atomic_number(self) -> int:
-        return self._data["atomic_number"]
-
-    @property
-    def atomic_mass(self) -> float:
-        return self._data["atomic_mass"]
-
-    @property
-    def schema(self) -> ElementSchema:
-        return self._schema
+    @classmethod
+    def from_symbol_and_data(cls, symbol: str, data: Dict[str, Any]) -> "ChemicalElement":
+        """Factory method to create ChemicalElement from periodic table data."""
+        return cls(
+            symbol=Symbol[symbol],
+            name=data["name"],
+            atomic_number=data["atomic_number"],
+            atomic_mass=data["atomic_mass"],
+            properties=[],
+            _data=data,
+        )
 
     def __getattr__(self, name: str) -> Any:
-        if name in self._data:
-            return self._data[name]
+        if name.startswith("_"):
+            raise AttributeError(f"'{type(self).__name__}' object has no attribute '{name}'")
+        data = object.__getattribute__(self, "_data")
+        if name in data:
+            return data[name]
         raise AttributeError(f"'{type(self).__name__}' object has no attribute '{name}'")
-
-    def __repr__(self) -> str:
-        return f"ChemicalElement(symbol='{self.symbol}', name='{self.name}')"
-

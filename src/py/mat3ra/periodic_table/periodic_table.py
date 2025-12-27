@@ -22,7 +22,7 @@ class PeriodicTable:
 
     def _initialize(self, data: Dict):
         for symbol, element_data in data.items():
-            self._elements[symbol] = ChemicalElement(symbol, element_data)
+            self._elements[symbol] = ChemicalElement.from_symbol_and_data(symbol, element_data)
 
     def get_element(self, symbol: str) -> ChemicalElement:
         symbol_upper = symbol.strip().capitalize()
