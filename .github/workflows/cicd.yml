@@ -13,7 +13,6 @@ jobs:
     strategy:
       matrix:
         python-version:
-          - 3.9.x
           - 3.10.x
           - 3.11.x
           - 3.12.x
@@ -42,6 +41,8 @@ jobs:
       matrix:
         node-version:
           - 20.x
+          - 22.x
+          - 24.x
 
     steps:
       - name: Checkout this repository
