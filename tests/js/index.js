@@ -10,7 +10,7 @@ import {
     getElementsBondsData,
     PERIODIC_TABLE,
     UNITS,
-} from "../../lib/js/index";
+} from "../../dist/js/index.js";
 
 const testCases = [
     {

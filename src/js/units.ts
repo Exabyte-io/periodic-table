@@ -91,7 +91,7 @@ export const CONVERSION = {
  *  // returns 27.21138
  */
 export function convertUnit(
-    value,
+    value: number | string | undefined,
     {
         from = UNITS.energy.electronvolt,
         to = UNITS.energy.electronvolt,
