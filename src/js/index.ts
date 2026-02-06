@@ -51,8 +51,8 @@ export function getElectronegativity(symbol: string) {
  */
 export function filterBondsDataByElementsAndOrder(
     bondsData: any[],
-    element1: any,
-    element2: any,
+    element1: string,
+    element2: string,
     order = undefined,
 ) {
     return bondsData.filter((b) => {
@@ -75,18 +75,22 @@ export function defaultElementsBondsDataEntry(
     element2: string,
     order = undefined,
 ) {
+    let element1CovalentRadius, element2CovalentRadius;
     if (
         !PERIODIC_TABLE[element1].covalent_radius_pm ||
         !PERIODIC_TABLE[element2].covalent_radius_pm
     ) {
-        throw new Error(
+        console.warn(
             `Invalid element symbol(s) provided: ${!PERIODIC_TABLE[element1] ? element1 : ""} ${
                 !PERIODIC_TABLE[element2] ? element2 : ""
             }`,
         );
+        element1CovalentRadius = 1.0; // default covalent radius in angstroms
+        element2CovalentRadius = 1.0; // default covalent radius in angstroms
+    } else {
+        element1CovalentRadius = PERIODIC_TABLE[element1].covalent_radius_pm / 100;
+        element2CovalentRadius = PERIODIC_TABLE[element2].covalent_radius_pm / 100;
     }
-    const element1CovalentRadius = PERIODIC_TABLE[element1].covalent_radius_pm / 100;
-    const element2CovalentRadius = PERIODIC_TABLE[element2].covalent_radius_pm / 100;
     return {
         elements: [element1, element2],
         energy: {
@@ -110,6 +114,9 @@ export function defaultElementsBondsDataEntry(
  */
 export function getElementsBondsData(element1: string, element2: string, order = undefined) {
     const defaultElementsBondsData = defaultElementsBondsDataEntry(element1, element2, order);
+    if (!defaultElementsBondsData) {
+        return [];
+    }
     const bondsData = filterBondsDataByElementsAndOrder(ELEMENT_BONDS, element1, element2, order);
     return bondsData.length ? bondsData : [defaultElementsBondsData];
 }

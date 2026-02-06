@@ -13,6 +13,7 @@ export class ChemicalElement {
      */
     constructor(symbol: string) {
         this._symbol = symbol;
+        this.symbol = symbol;
         this._properties = PERIODIC_TABLE[this.symbol];
     }
 

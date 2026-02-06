@@ -10,7 +10,7 @@ import {
     getElementsBondsData,
     PERIODIC_TABLE,
     UNITS,
-} from "../../dist/js/index";
+} from "../../dist/js/index.js";
 
 const testCases = [
     {
@@ -75,6 +75,7 @@ testCases.forEach(({ el1, el2, maxOrder }) => {
         it("should return bond order", () => {
             const data = getElementsBondsData(el1, el2);
             const result = filterBondsDataByElementsAndOrder(data, el1, el2, maxOrder);
+            console.log(result[0].order === maxOrder);
             expect(result).to.be.length(1);
             expect(result[0].order).to.be.equal(maxOrder);
         });
