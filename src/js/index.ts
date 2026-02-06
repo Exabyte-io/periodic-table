@@ -1,9 +1,29 @@
 import ELEMENT_BONDS from "../../element-bonds.json";
 import ELEMENT_COLORS from "../../element-colors.json";
-import PERIODIC_TABLE from "../../periodic-table.json";
+import PERIODIC_TABLE_DATA from "../../periodic-table.json";
 // eslint-disable-next-line import/no-cycle
 import { ChemicalElement } from "./element";
 import { UNITS } from "./units";
+
+export interface PeriodicTableEntry {
+    name: string;
+    symbol: string;
+    atomic_number: number;
+    atomic_mass: number;
+    atomic_radius_pm: number | ""; // empty string if unknown
+    covalent_radius_pm?: number | ""; // empty string if unknown
+    van_der_waals_radius_pm?: number | ""; // empty string if unknown
+    pauling_negativity?: number | ""; // empty string if unknown;
+    electron_configuration?: number | ""; // empty string if unknown
+    group?: number | null;
+    period?: number | null;
+}
+
+export interface PeriodicTable {
+    [symbol: string]: PeriodicTableEntry;
+}
+
+const PERIODIC_TABLE: PeriodicTable = PERIODIC_TABLE_DATA as PeriodicTable;
 
 export { ELEMENT_BONDS };
 export { PERIODIC_TABLE };
@@ -16,8 +36,8 @@ export { UNITS };
  * @param symbol {String} element symbol to get electronegativity for.
  * @returns {number}
  */
-export function getElectronegativity(symbol) {
-    const config = PERIODIC_TABLE[symbol];
+export function getElectronegativity(symbol: string) {
+    const config = (PERIODIC_TABLE as PeriodicTable)[symbol] as PeriodicTableEntry;
     return config ? config.pauling_negativity : 0; // return zero if value cannot be accessed by symbol
 }
 
@@ -30,9 +50,9 @@ export function getElectronegativity(symbol) {
  * @returns {Array}
  */
 export function filterBondsDataByElementsAndOrder(
-    bondsData,
-    element1,
-    element2,
+    bondsData: any[],
+    element1: any,
+    element2: any,
     order = undefined,
 ) {
     return bondsData.filter((b) => {
@@ -50,7 +70,21 @@ export function filterBondsDataByElementsAndOrder(
  * @param order {Number} the bond number
  * @returns {Object}
  */
-export function defaultElementsBondsDataEntry(element1, element2, order = undefined) {
+export function defaultElementsBondsDataEntry(
+    element1: string,
+    element2: string,
+    order = undefined,
+) {
+    if (
+        !PERIODIC_TABLE[element1].covalent_radius_pm ||
+        !PERIODIC_TABLE[element2].covalent_radius_pm
+    ) {
+        throw new Error(
+            `Invalid element symbol(s) provided: ${!PERIODIC_TABLE[element1] ? element1 : ""} ${
+                !PERIODIC_TABLE[element2] ? element2 : ""
+            }`,
+        );
+    }
     const element1CovalentRadius = PERIODIC_TABLE[element1].covalent_radius_pm / 100;
     const element2CovalentRadius = PERIODIC_TABLE[element2].covalent_radius_pm / 100;
     return {
@@ -74,7 +108,7 @@ export function defaultElementsBondsDataEntry(element1, element2, order = undefi
  * @param order {Number} the bond number
  * @returns {Array}
  */
-export function getElementsBondsData(element1, element2, order = undefined) {
+export function getElementsBondsData(element1: string, element2: string, order = undefined) {
     const defaultElementsBondsData = defaultElementsBondsDataEntry(element1, element2, order);
     const bondsData = filterBondsDataByElementsAndOrder(ELEMENT_BONDS, element1, element2, order);
     return bondsData.length ? bondsData : [defaultElementsBondsData];
@@ -92,8 +126,13 @@ export function getElementsBondsData(element1, element2, order = undefined) {
  * @param elementSymbol {String}
  * @returns {Number}
  */
-export function getElementAtomicRadius(elementSymbol) {
+export function getElementAtomicRadius(elementSymbol: string) {
     const config = PERIODIC_TABLE[elementSymbol];
+    if (!PERIODIC_TABLE[elementSymbol].atomic_radius_pm) {
+        throw new Error(
+            `Element symbol "${elementSymbol}" not found in PERIODIC_TABLE. Returning default atomic radius of 1.0 angstrom.`,
+        );
+    }
     if (config) {
         return PERIODIC_TABLE[elementSymbol].atomic_radius_pm / 100;
     }
@@ -125,21 +164,18 @@ export function getElementAtomicRadius(elementSymbol) {
  * ]
  */
 export function getAtomicPropertiesFlat({
-    elements,
-    properties,
-    propertiesMap = undefined,
+    elements = [],
+    properties = [],
+    propertiesMap = {},
     separator = ":",
 }) {
-    const allProperties = [];
+    const allProperties: { [x: string]: any }[] = [];
     const filteredElems = elements.filter((e) => ChemicalElement.isValidSymbol(e));
     const filteredProps = properties.filter((p) => ChemicalElement.isValidProperty(p));
 
     filteredProps.forEach((prop) => {
-        const pName =
-            // eslint-disable-next-line no-prototype-builtins
-            propertiesMap !== undefined && propertiesMap.hasOwnProperty(prop)
-                ? propertiesMap[prop]
-                : prop;
+        // eslint-disable-next-line no-prototype-builtins
+        const pName = propertiesMap.hasOwnProperty(prop) ? propertiesMap[prop] : prop;
         filteredElems.forEach((elem) => {
             const key = `${pName}${separator}${elem}`;
             const val = PERIODIC_TABLE[elem][prop];

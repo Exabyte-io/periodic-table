@@ -3,12 +3,16 @@ import { ELEMENT_COLORS, PERIODIC_TABLE } from "./index";
 import { CONVERSION, convertUnit, UNITS } from "./units";
 
 export class ChemicalElement {
+    private _properties: any;
+
+    private _symbol: string;
+
     /**
      * @summary ChemicalElement class constructor
      * @param {string} symbol - Atomic symbol (not case-sensitive)
      */
-    constructor(symbol) {
-        this.symbol = symbol;
+    constructor(symbol: string) {
+        this._symbol = symbol;
         this._properties = PERIODIC_TABLE[this.symbol];
     }
 
@@ -41,7 +45,7 @@ export class ChemicalElement {
         return undefined;
     }
 
-    massInUnits(unit) {
+    massInUnits(unit: string) {
         if (this.mass === undefined) return;
         if (unit === UNITS.mass.kilogram)
             return this.mass * CONVERSION.mass[UNITS.mass.atomicMassUnit][UNITS.mass.kilogram];
@@ -59,7 +63,7 @@ export class ChemicalElement {
         return undefined;
     }
 
-    atomicRadiusInUnits(unit) {
+    atomicRadiusInUnits(unit: string) {
         return convertUnit(this.atomicRadius, {
             from: UNITS.length.picometer,
             to: unit,
@@ -80,7 +84,7 @@ export class ChemicalElement {
         return undefined;
     }
 
-    vanDerWaalsRadiusInUnits(unit) {
+    vanDerWaalsRadiusInUnits(unit: string) {
         return convertUnit(this.vanDerWaalsRadius, {
             from: UNITS.length.picometer,
             to: unit,
@@ -103,7 +107,7 @@ export class ChemicalElement {
         return undefined;
     }
 
-    ionizationPotentialInUnits(unit) {
+    ionizationPotentialInUnits(unit: string) {
         return convertUnit(this.ionizationPotential, {
             from: UNITS.energy.electronvolt,
             to: unit,
@@ -112,14 +116,14 @@ export class ChemicalElement {
     }
 
     static get colors() {
-        return ELEMENT_COLORS;
+        return ELEMENT_COLORS as { [symbol: string]: string };
     }
 
-    static getColorBySymbol(symbol) {
+    static getColorBySymbol(symbol: string) {
         return this.colors[symbol] || "#999";
     }
 
-    static isValidName(elementName) {
+    static isValidName(elementName: string) {
         return (
             Object.keys(PERIODIC_TABLE).find((key) => PERIODIC_TABLE[key].name === elementName) !==
             undefined
@@ -132,7 +136,7 @@ export class ChemicalElement {
      * @param {boolean} caseSensitive - Whether to use case-sensitive check for symbol (default: false)
      * @returns {boolean}
      */
-    static isValidSymbol(symbol, caseSensitive = false) {
+    static isValidSymbol(symbol: string, caseSensitive = false) {
         if (!caseSensitive) {
             return (
                 Object.keys(PERIODIC_TABLE)
@@ -149,7 +153,7 @@ export class ChemicalElement {
      * @param {string} prop - Property name (e.g. 'atomic_number')
      * @returns {boolean}
      */
-    static isValidProperty(prop) {
+    static isValidProperty(prop: string) {
         // eslint-disable-next-line no-prototype-builtins
         return PERIODIC_TABLE.H.hasOwnProperty(prop);
     }
